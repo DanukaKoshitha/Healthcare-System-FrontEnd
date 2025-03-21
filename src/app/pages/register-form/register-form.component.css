@@ -1,0 +1,16 @@
+.body{
+    width: 100%;
+    justify-items: center;
+}
+
+#btn{
+    margin-left: 0px;
+    width: 500px;
+    margin-bottom: 30px;
+}
+
+#header{
+    margin-left: 465px;
+    padding: 10px;
+    color: #3742fa;
+}
