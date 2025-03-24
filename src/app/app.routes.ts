@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
 import { MainDashboardComponent } from './pages/main-dashboard/main-dashboard.component';
-import { LoginFormComponent } from './pages/login-form/login-form.component';
 import { RegisterFormComponent } from './pages/register-form/register-form.component';
+import { UserHomePageComponent } from './pages/user-home-page/user-home-page.component';
 
 export const routes: Routes = [
     {
@@ -11,5 +11,13 @@ export const routes: Routes = [
     {
         path:"register",
         component:RegisterFormComponent
+    },
+    {
+        path:"go-singup",
+        component:RegisterFormComponent
+    },
+    {
+        path:"userHomePage",
+        component:UserHomePageComponent
     }
 ];
