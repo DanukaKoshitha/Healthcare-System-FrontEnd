@@ -13,10 +13,6 @@ export const routes: Routes = [
         component:RegisterFormComponent
     },
     {
-        path:"go-singup",
-        component:RegisterFormComponent
-    },
-    {
         path:"userHomePage",
         component:UserHomePageComponent
     }

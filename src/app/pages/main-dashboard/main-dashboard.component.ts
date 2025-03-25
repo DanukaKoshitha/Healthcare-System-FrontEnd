@@ -18,6 +18,8 @@ export class MainDashboardComponent {
     private router: Router
   ) {}
 
+  /////////////////////////  Login part   /////////////////////////////////
+
   email:string = "";
   password:string = ""
 
