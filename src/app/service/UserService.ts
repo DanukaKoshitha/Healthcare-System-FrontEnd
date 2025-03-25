@@ -20,4 +20,8 @@ export class UserService{
         const body = {email,password}
         return this.http.post<AuthenticationResponse>("http://localhost:8080/user/login",body)
     }
+
+    getRegisterToken(body : any):Observable<AuthenticationResponse>{
+      return this.http.post<AuthenticationResponse>("http://localhost:8080/user/register",body)
+    }
 }
