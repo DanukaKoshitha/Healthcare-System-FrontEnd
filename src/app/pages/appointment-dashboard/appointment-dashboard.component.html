@@ -26,19 +26,19 @@
   <!-- Cards Container -->
   <div class="container">
       <!-- Repeat this card block for each doctor -->
-      <div class="card">
-        <img src="https://i.insider.com/67a3b8f37bb3f854015bde3d?width=700" alt="Doctor Image">
-        <div class="card-body">
-            <h5 class="card-title">Dr. John Smith</h5>
-            <p class="card-text">Cardiologist with 15 years experience</p>
-            <a data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal" class="btn">
-                Read More
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                    <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                </svg>
-            </a>
-        </div>
-    </div> 
+      <div class="card" *ngFor="let doctor of doctors">
+          <img [src]="doctor.image" alt="Doctor Image">
+          <div class="card-body">
+              <h5 class="card-title">{{doctor.name}}</h5>
+              <p class="card-text">{{doctor.specialization}} with {{doctor.yearsOfExperience}} years experience</p>
+              <a data-modal-target="extralarge-modal" data-modal-toggle="extralarge-modal" class="btn">
+                  Read More
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                      <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+                  </svg>
+              </a>
+          </div>
+      </div>
 
   </div>
 
