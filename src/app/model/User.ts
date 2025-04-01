@@ -18,6 +18,6 @@ export class User{
         this.role = role;
         this.gender = gender;
         this.email = email;
-        this.password = password;
+        this.password = password; 
     }
 }

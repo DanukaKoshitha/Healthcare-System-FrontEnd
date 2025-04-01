@@ -13,15 +13,19 @@ export interface AuthenticationResponse {
 export class UserService{
 
     constructor(private http:HttpClient){
-
+      
     }
 
     getToken(email:string , password:string):Observable<AuthenticationResponse>{
         const body = {email,password}
-        return this.http.post<AuthenticationResponse>("http://localhost:8080/user/login",body)
+        return this.http.post<AuthenticationResponse>("http://localhost:8080/user/login",body);
     }
 
     getRegisterToken(body : any):Observable<AuthenticationResponse>{
-      return this.http.post<AuthenticationResponse>("http://localhost:8080/user/register",body)
+      return this.http.post<AuthenticationResponse>("http://localhost:8080/user/register",body);
+    }
+
+    getDoctors(){
+      return this.http.get("http://localhost:8080/doctor/get-all");
     }
 }
