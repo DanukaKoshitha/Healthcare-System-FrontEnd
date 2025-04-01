@@ -1,111 +1,158 @@
 <body class="bg-gray-100 dark:bg-gray-900">
+  <!-- Blur Background -->
+  <div id="modal-backdrop" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40"></div>
+
   <!-- Navbar -->
   <nav class="bg-white border-gray-200 dark:bg-gray-900">
-      <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-          <a class="flex items-center space-x-3 rtl:space-x-reverse">
-              <img src="https://i.insider.com/67a3b8f37bb3f854015bde3d?width=700" class="h-8" alt="Logo">
-              <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white"> "Your Health, Our Priority – Book with the Best Doctors Today!" 🌿✨</span>
-          </a>
-          <div class="dropdown">
-              <button type="button" data-dropdown-toggle="language-dropdown-menu" class="dropdown-button">
-                  All Doctors
-              </button>
-              <!-- Dropdown -->
-              <div class="dropdown-menu">
-                  <ul class="p-2">
-                      <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">All Doctors</a></li>
-                      <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Cardiologist</a></li>
-                      <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Dermatologist</a></li>
-                      <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Orthopedic</a></li>
-                  </ul>
-              </div>
-          </div>
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+      <a class="flex items-center space-x-3 rtl:space-x-reverse">
+        <img src="https://i.insider.com/67a3b8f37bb3f854015bde3d?width=700" class="h-8" alt="Logo">
+        <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Your Health, Our Priority – Book with the Best Doctors Today! 🌿✨</span>
+      </a>
+      <div class="dropdown">
+        <button type="button" data-dropdown-toggle="language-dropdown-menu" class="dropdown-button">
+          All Doctors
+        </button>
+        <!-- Dropdown -->
+        <div class="dropdown-menu">
+          <ul class="p-2">
+            <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">All Doctors</a></li>
+            <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Cardiologist</a></li>
+            <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Dermatologist</a></li>
+            <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Orthopedic</a></li>
+          </ul>
+        </div>
       </div>
+    </div>
   </nav>
 
   <!-- Cards Container -->
-  <div class="container">
-      <!-- Repeat this card block for each doctor -->
-      <div class="card" *ngFor="let doctor of doctors">
-          <img [src]="doctor.image" alt="Doctor Image">
-          <div class="card-body">
-              <h5 class="card-title">{{doctor.name}}</h5>
-              <p class="card-text">{{doctor.specialization}} with {{doctor.yearsOfExperience}} years experience</p>
-              <a (click)="showModel(doctor)" class="btn">
-                  Read More
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
-                      <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
-                  </svg>
-              </a>
-          </div>
+  <div class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <!-- Doctor Card -->
+    <div class="card bg-white rounded-lg shadow dark:bg-gray-800" *ngFor="let doctor of doctors">
+      <img [src]="doctor.image" alt="Doctor Image" class="w-full h-48 object-cover rounded-t-lg">
+      <div class="p-5">
+        <h5 class="card-title text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{doctor.name}}</h5>
+        <p class="card-text mt-2 text-gray-700 dark:text-gray-400">{{doctor.specialization}} with {{doctor.yearsOfExperience}} years experience</p>
+        <a (click)="showModel(doctor)" class="btn mt-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+          Read More
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10" class="w-4 h-4 ml-2">
+            <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+          </svg>
+        </a>
       </div>
-
+    </div>
   </div>
 
   <!-- Modal -->
-  <div id="extralarge-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-      <div class="relative w-full max-w-5xl max-h-full">
-          <!-- Modal Content -->
-          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-              <!-- Modal Header -->
-              <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
-                  <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-                      Doctor Details
-                  </h3>
-                  <button type="button" (click)="closeModel()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="extralarge-modal">
-                      <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+  <div id="extralarge-modal" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+    <div class="relative w-full max-w-5xl mx-auto max-h-full">
+      <!-- Modal Content -->
+      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+        <!-- Modal Header -->
+        <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+          <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+            Doctor Details
+          </h3>
+          <button type="button" (click)="closeModel()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
+
+        <!-- Modal Body -->
+        <div class="p-6 space-y-6 overflow-y-auto max-h-[60vh]" *ngIf="selectedDoctor">
+          <div class="flex flex-col md:flex-row gap-6">
+            <div class="w-full md:w-1/3">
+              <img [src]="selectedDoctor.image || 'https://i.insider.com/67a3b8f37bb3f854015bde3d?width=700'" class="w-full rounded-lg" alt="Doctor Image">
+            </div>
+            <div class="w-full md:w-2/3 space-y-4">
+              <h4 class="text-lg font-semibold text-gray-900 dark:text-white">About {{ selectedDoctor.name }}</h4>
+              <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
+                {{ selectedDoctor.specialization }} with {{ selectedDoctor.yearsOfExperience }} years of experience.
+              </p>
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <h5 class="font-medium text-gray-900 dark:text-white">Availability</h5>
+                  <ul class="mt-2 space-y-2">
+                    <li *ngFor="let timeSlot of selectedDoctor.timeSlots" class="flex items-center text-gray-500 dark:text-gray-400">
+                      <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
                       </svg>
-                      <span class="sr-only">Close modal</span>
-                  </button>
-              </div>
+                      🗓️ {{ timeSlot.day }} ➝ ⏰ {{ timeSlot.startTime }} - {{ timeSlot.endTime }}
+                    </li>
+                  </ul>
+                </div>
 
-              <!-- Modal Body -->
-            <div class="p-6 space-y-6" *ngIf="selectedDoctor">
-              <div class="flex flex-col md:flex-row gap-6">
-                  <div class="w-full md:w-1/3">
-                      <img [src]="selectedDoctor.image || 'https://i.insider.com/67a3b8f37bb3f854015bde3d?width=700'" class="w-full rounded-lg" alt="Doctor Image">
+                <div>
+                  <h5 class="font-medium text-gray-900 dark:text-white">Qualifications</h5>
+                  <ul class="list-disc pl-5 text-gray-500 dark:text-gray-400">
+                    <li *ngFor="let qualification of selectedDoctor.qualifications">
+                      🎓 {{ qualification.name }} | 🏛️ {{ qualification.institution }} | 📅 {{ qualification.yearObtained }}
+                    </li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h5 class="font-medium text-gray-900 dark:text-white">💰 Appointment Fee</h5>
+                  <div class="mt-2 flex items-center text-gray-500 dark:text-gray-400">
+                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                    </svg>
+                    💵 {{ "LKR " + selectedDoctor.price }}
                   </div>
-                  <div class="w-full md:w-2/3 space-y-4">
-                      <h4 class="text-lg font-semibold text-gray-900 dark:text-white">About {{ selectedDoctor.name }}</h4>
-                      <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                          {{ selectedDoctor.specialization }} with {{ selectedDoctor.yearsOfExperience }} years of experience.
-                      </p>
-                      <div class="grid grid-cols-2 gap-4">
-                        <h5 class="font-medium text-gray-900 dark:text-white">Availability</h5>
-                          <ul class="list-disc pl-5 text-gray-500 dark:text-gray-400">
-                            <li *ngFor="let timeSlot of selectedDoctor.timeSlots">
-                              🗓️ {{ timeSlot.day }} ➝ ⏰ {{ timeSlot.startTime }} - {{ timeSlot.endTime }}
-                            </li>
-                          </ul>
-
-                        <h5 class="font-medium text-gray-900 dark:text-white">Qualifications</h5>
-                          <ul class="list-disc pl-5 text-gray-500 dark:text-gray-400">
-                            <li *ngFor="let qualification of selectedDoctor.qualifications">
-                              🎓 {{ qualification.name }} | 🏛️ {{ qualification.institution }} | 📅 {{ qualification.yearObtained }}
-                            </li>
-                          </ul>
-
-                          <div>
-                            <h5 class="font-medium text-gray-900 dark:text-white">💰 Appointment Fee</h5>
-                            <ul class="list-disc pl-5 text-gray-500 dark:text-gray-400">
-                              <li>💵 {{ "LKR " + selectedDoctor.price }}</li>
-                            </ul>
-                          </div>
-
-                    </div>
-                  </div>
+                  <br>
+                </div>
               </div>
+            </div>
           </div>
 
-              <!-- Modal Footer -->
-              <div class="flex items-center p-6 space-x-3 border-t border-gray-200 rounded-b dark:border-gray-600">
-                  <button data-modal-hide="extralarge-modal" type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Book Appointment</button>
-                  <button (click)="closeModel()" type="button" class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
-              </div>
+
+          <div class="flex items-center p-2 border-t border-gray-200 rounded-b dark:border-gray-600">
 
           </div>
+
+          <!-- Date Picker -->
+          <div class="">
+            <label class="block m-2 p-3 pl-0 text-sm font-medium text-gray-900 dark:text-white">Select Appointment Date</label>
+            <div class="relative max-w-sm">
+              <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                </svg>
+              </div>
+              <input datepicker datepicker-autohide type="text"
+                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                     placeholder="📅 Select date">
+            </div>
+          </div>
+
+          <!-- Time Slots -->
+          <div class="mt-6">
+            <label class="block m-2 p-3 pl-0 text-sm font-medium text-gray-900 dark:text-white">Available Time Slots</label>
+            <div class="flex flex-wrap gap-3">
+              <button *ngFor="let timeSlot of selectedDoctor?.timeSlots"
+                      type="button"
+                      class="flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10 2a8 8 0 1 0 8 8 8 8 0 0 0-8-8ZM9 5h2v6H9V5Zm1 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
+                </svg>
+                <span>⏰ {{ timeSlot.day }} {{ timeSlot.startTime }} - {{ timeSlot.endTime }}</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal Footer -->
+        <div class="flex items-center p-6 gap-3 border-t border-gray-200 rounded-b dark:border-gray-600">
+          <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Book Appointment</button>
+          <button (click)="closeModel()" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+        </div>
       </div>
+    </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>

@@ -31,19 +31,30 @@ export class AppointmentDashboardComponent implements OnInit{
     });
   }
 
-  showModel(doctor : Doctor){
+  showModel(doctor: any) {
     this.selectedDoctor = doctor;
-    const model = document.getElementById("extralarge-modal");
-    if(model){
-      model.classList.remove("hidden");
+    const backdrop = document.getElementById('modal-backdrop');
+    const modal = document.getElementById('extralarge-modal');
+
+    if (backdrop && modal) {
+      backdrop.classList.remove('hidden');
+      modal.classList.remove('hidden');
+
+      document.body.classList.add('overflow-hidden');
     }
   }
 
-  closeModel(){
-    this.selectedDoctor = null;
-    const model =  document.getElementById("extralarge-modal");
-    if(model){
-      model.classList.add("hidden");
+  closeModel() {
+    const backdrop = document.getElementById('modal-backdrop');
+    const modal = document.getElementById('extralarge-modal');
+
+    if (backdrop && modal) {
+      backdrop.classList.add('hidden');
+      modal.classList.add('hidden');
+      
+      document.body.classList.remove('overflow-hidden');
     }
   }
 }
+
+
