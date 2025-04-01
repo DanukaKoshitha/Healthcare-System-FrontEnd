@@ -21,6 +21,7 @@ export class AppointmentDashboardComponent implements OnInit{
   }
 
   doctors : Doctor[] = [];
+  selectedDoctor : Doctor | null = null;
 
   ngOnInit() {
     this.userService.getDoctors().subscribe((res : Doctor[]) =>{
@@ -30,4 +31,19 @@ export class AppointmentDashboardComponent implements OnInit{
     });
   }
 
+  showModel(doctor : Doctor){
+    this.selectedDoctor = doctor;
+    const model = document.getElementById("extralarge-modal");
+    if(model){
+      model.classList.remove("hidden");
+    }
+  }
+
+  closeModel(){
+    this.selectedDoctor = null;
+    const model =  document.getElementById("extralarge-modal");
+    if(model){
+      model.classList.add("hidden");
+    }
+  }
 }
