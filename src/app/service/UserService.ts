@@ -1,6 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
+import { Doctor } from "../model/Doctor";
 
 export interface AuthenticationResponse {
   token: string;
@@ -13,7 +14,7 @@ export interface AuthenticationResponse {
 export class UserService{
 
     constructor(private http:HttpClient){
-      
+
     }
 
     getToken(email:string , password:string):Observable<AuthenticationResponse>{
@@ -25,7 +26,7 @@ export class UserService{
       return this.http.post<AuthenticationResponse>("http://localhost:8080/user/register",body);
     }
 
-    getDoctors(){
-      return this.http.get("http://localhost:8080/doctor/get-all");
+    getDoctors():Observable<Doctor[]>{
+      return this.http.get<Doctor[]>("http://localhost:8080/doctor/get-all");
     }
 }

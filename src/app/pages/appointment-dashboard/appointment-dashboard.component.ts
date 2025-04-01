@@ -14,12 +14,20 @@ import { Doctor } from '../../model/Doctor';
   standalone:true
 })
 
-export class AppointmentDashboardComponent {
+export class AppointmentDashboardComponent implements OnInit{
 
   constructor(private userService: UserService , private http: HttpClient){
 
   }
 
+  doctors : Doctor[] = [];
 
+  ngOnInit() {
+    this.userService.getDoctors().subscribe((res : Doctor[]) =>{
+        this.doctors  =  res;
+    }, error => {
+      console.error("Error fetching doctors:", error);
+    });
+  }
 
 }
