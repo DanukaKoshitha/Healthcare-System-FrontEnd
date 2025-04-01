@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register-form',
-  imports: [FormsModule,HttpClientModule,CommonModule],
+  imports: [FormsModule,CommonModule,HttpClientModule],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.css',
   providers: [UserService],
@@ -42,7 +42,7 @@ export class RegisterFormComponent {
       password: this.password
     };
 
-    console.log("Sending data:", body); 
+    console.log("Sending data:", body);
 
   this.userService.getRegisterToken(body).subscribe(
     (rss) => {
