@@ -1,6 +1,6 @@
 import { UserService } from './../../service/UserService';
 import { CommonModule } from '@angular/common';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Doctor } from '../../model/Doctor';
@@ -17,7 +17,6 @@ import { Doctor } from '../../model/Doctor';
 export class AppointmentDashboardComponent implements OnInit{
 
   constructor(private userService: UserService , private http: HttpClient){
-
   }
 
   doctors : Doctor[] = [];
@@ -31,28 +30,19 @@ export class AppointmentDashboardComponent implements OnInit{
     });
   }
 
-  showModel(doctor: any) {
+  showModel(doctor : Doctor){
     this.selectedDoctor = doctor;
-    const backdrop = document.getElementById('modal-backdrop');
-    const modal = document.getElementById('extralarge-modal');
-
-    if (backdrop && modal) {
-      backdrop.classList.remove('hidden');
-      modal.classList.remove('hidden');
-
-      document.body.classList.add('overflow-hidden');
+    const model = document.getElementById("extralarge-modal");
+    if(model){
+      model.classList.remove("hidden");
     }
   }
 
-  closeModel() {
-    const backdrop = document.getElementById('modal-backdrop');
-    const modal = document.getElementById('extralarge-modal');
-
-    if (backdrop && modal) {
-      backdrop.classList.add('hidden');
-      modal.classList.add('hidden');
-      
-      document.body.classList.remove('overflow-hidden');
+  closeModel(){
+    this.selectedDoctor = null;
+    const model =  document.getElementById("extralarge-modal");
+    if(model){
+      model.classList.add("hidden");
     }
   }
 }
