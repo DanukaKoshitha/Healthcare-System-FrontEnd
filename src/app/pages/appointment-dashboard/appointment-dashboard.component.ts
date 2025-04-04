@@ -32,6 +32,9 @@ export class AppointmentDashboardComponent implements OnInit{
 
   showModel(doctor : Doctor){
     this.selectedDoctor = doctor;
+
+    //document.getElementById('modal-backdrop')?.classList.remove('hidden');
+
     const model = document.getElementById("extralarge-modal");
     if(model){
       model.classList.remove("hidden");
@@ -40,6 +43,9 @@ export class AppointmentDashboardComponent implements OnInit{
 
   closeModel(){
     this.selectedDoctor = null;
+
+    //document.getElementById('modal-backdrop')?.classList.add('hidden');
+
     const model =  document.getElementById("extralarge-modal");
     if(model){
       model.classList.add("hidden");
