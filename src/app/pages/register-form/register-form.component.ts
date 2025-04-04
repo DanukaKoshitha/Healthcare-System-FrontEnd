@@ -2,12 +2,12 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../../service/UserService';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-register-form',
-  imports: [FormsModule,CommonModule,HttpClientModule],
+  imports: [FormsModule,CommonModule,HttpClientModule,ReactiveFormsModule],
   templateUrl: './register-form.component.html',
   styleUrl: './register-form.component.css',
   providers: [UserService],
@@ -44,14 +44,17 @@ export class RegisterFormComponent {
 
     console.log("Sending data:", body);
 
-  this.userService.getRegisterToken(body).subscribe(
-    (rss) => {
-      console.log('Token', rss.token);
+    this.userService.getRegisterToken(body).subscribe(
+      (response) => {
+
+      console.log("User Register Token" + response.token);
+      localStorage.setItem("Token", response.token);
+
       this.router.navigate(['/userHomePage']);
-    },
-    (error) => {
-      console.error('Registration failed:', error);
-    }
-  );
+      },
+      (error) => {
+        console.error('Registration failed:', error);
+      }
+    );
   }
 }

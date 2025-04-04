@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { UserService } from '../../service/UserService';
@@ -12,6 +12,7 @@ import {FormsModule, ReactiveFormsModule } from '@angular/forms'
   styleUrls: ['./main-dashboard.component.css'],
   providers:[UserService]
 })
+
 export class MainDashboardComponent {
   constructor(
     private userService: UserService,
@@ -21,12 +22,14 @@ export class MainDashboardComponent {
   /////////////////////////  Login part   /////////////////////////////////
 
   email:string = "";
-  password:string = ""
+  password:string = "";
 
   login() {
-    this.userService.getToken(this.email, this.password).subscribe(
+    this.userService.userLoginToken(this.email, this.password).subscribe(
       (response) => {
-        console.log('Login successful, token:', response.token);
+        console.log('Login successful, User Login token:', response.token);
+        localStorage.setItem("Token" , response.token);
+
         this.router.navigate(['/userHomePage']);
       },
       (error) => {
