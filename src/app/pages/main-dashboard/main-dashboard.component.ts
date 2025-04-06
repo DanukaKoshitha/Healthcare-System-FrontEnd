@@ -25,10 +25,13 @@ export class MainDashboardComponent {
   password:string = "";
 
   login() {
-    this.userService.userLoginToken(this.email, this.password).subscribe(
+    this.userService.getLoginToken(this.email, this.password).subscribe(
       (response) => {
         console.log('Login successful, User Login token:', response.token);
         localStorage.setItem("Token" , response.token);
+
+        console.log(response.userId);
+        localStorage.setItem("UserId",response.userId.toString());
 
         this.router.navigate(['/userHomePage']);
       },
