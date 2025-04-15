@@ -6,6 +6,7 @@ import { FormsModule } from '@angular/forms';
 import { Doctor } from '../../model/Doctor';
 import { AppointmentService } from '../../service/AppointmentService';
 import { TimeSlot } from '../../model/TimeSlot';
+import { Appointment } from '../../model/Appointment';
 
 @Component({
   selector: 'app-appointment-dashboard',
@@ -27,16 +28,16 @@ export class AppointmentDashboardComponent implements OnInit{
   doctorId: number = 0;
   userId : number = Number(localStorage.getItem("UserId"));
   date : string = "";
-  timeSlot : any;
+  timeSlot : string = "";
   status :string = "PENDING";
 
   selectedTimeSlot(timeSlot: TimeSlot){
-    this.timeSlot = timeSlot;
+    this.timeSlot = timeSlot.day + " " + timeSlot.startTime + " - " + timeSlot.endTime;
   }
 
   newAppointment(){
 
-    const body = {
+    const body : Appointment= {
       doctorId : this.doctorId,
       userId : this.userId,
       date : this.date,
@@ -48,8 +49,7 @@ export class AppointmentDashboardComponent implements OnInit{
       (response) =>{console.log("Successfull" + response);
       },
       (error) => {
-        console.log("Error");
-
+        console.log("Error" , error);
       }
     );
 
