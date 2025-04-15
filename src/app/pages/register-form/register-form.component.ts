@@ -50,6 +50,9 @@ export class RegisterFormComponent {
       console.log("User Register Token" + response.token);
       localStorage.setItem("Token", response.token);
 
+      console.log(response.userId);
+      localStorage.setItem("UserId",response.userId.toString());
+
       this.router.navigate(['/userHomePage']);
       },
       (error) => {

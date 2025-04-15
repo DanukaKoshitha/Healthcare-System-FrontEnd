@@ -5,18 +5,24 @@ import { Doctor } from '../model/Doctor';
 
 export interface AuthenticationResponse {
   token: string;
+  userId: number;
 }
 
 @Injectable({
   providedIn: 'root',
 })
+
 export class UserService {
   constructor(private http: HttpClient) {}
 
-  userLoginToken(email: string,password: string): Observable<AuthenticationResponse> {
+  getLoginToken(email: string,password: string): Observable<AuthenticationResponse> {
     const body = { email, password };
 
-    return this.http.post<AuthenticationResponse>('http://localhost:8080/user/login',body);
+    return this.http.post<AuthenticationResponse>('http://localhost:8080/user/login',body).pipe(
+      catchError(() =>{
+        return this.http.post<AuthenticationResponse>('http://localhost:8080/doctor/login',body);
+      })
+    )
   }
 
   getRegisterToken(body: any): Observable<AuthenticationResponse> {
