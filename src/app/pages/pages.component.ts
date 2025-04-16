@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-pages',
@@ -6,6 +6,6 @@ import { Component } from '@angular/core';
   templateUrl: './pages.component.html',
   styleUrl: './pages.component.css'
 })
-export class PagesComponent {
+export class PagesComponent{
 
 }

@@ -25,6 +25,7 @@ export class AppointmentDashboardComponent implements OnInit{
   doctors : Doctor[] = [];
   selectedDoctor : Doctor | null = null;
 
+  id : number = 0;
   doctorId: number = 0;
   userId : number = Number(localStorage.getItem("UserId"));
   date : string = "";
@@ -37,7 +38,7 @@ export class AppointmentDashboardComponent implements OnInit{
 
   newAppointment(){
 
-    const body : Appointment= {
+    const body = {
       doctorId : this.doctorId,
       userId : this.userId,
       date : this.date,
@@ -46,7 +47,7 @@ export class AppointmentDashboardComponent implements OnInit{
     }
 
     this.appointmentService.createAppointment(body).subscribe(
-      (response) =>{console.log("Successfull" + response);
+      (response) =>{console.log("Successfull " + response);
       },
       (error) => {
         console.log("Error" , error);
