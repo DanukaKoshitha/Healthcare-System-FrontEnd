@@ -37,8 +37,17 @@ export class UserDashBoardComponent implements OnInit{
   }
 
   deleteAppointment(id : number){
-    this.appointmentService.deleteAppointment(id).subscribe(res =>{
-      res == true ? console.log("success") : console.log("eroor");
-    });
+    this.appointmentService.deleteAppointment(id).subscribe({
+      next : (res) =>{
+        if (res === true) {
+          this.appointmentList = this.appointmentList.filter(appointment => appointment.id !== id);
+        } else {
+          console.error("Failed to delete appointment.");
+        }
+      },
+      error: err => {
+        console.error("Error deleting appointment:", err);
+      }
+    })
   }
 }
