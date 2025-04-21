@@ -23,7 +23,7 @@ export class UserDashBoardComponent implements OnInit{
   doctorMap : Map<number, Doctor> = new Map();
 
   ngOnInit() {
-      this.appointmentService.getAllAppointments().subscribe((res : Appointment[]) =>{
+      this.appointmentService.getAllAppointments(Number(localStorage.getItem("UserId"))).subscribe((res : Appointment[]) =>{
         this.appointmentList.push(...res)
 
         const doctorIds = [...new Set(res.map(a => a.doctorId))];

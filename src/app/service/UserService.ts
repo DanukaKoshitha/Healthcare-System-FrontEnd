@@ -83,8 +83,6 @@ export class UserService {
 
     const token = localStorage.getItem("Token");
 
-    console.log(body);  
-
     const headers = new HttpHeaders({
       'Authorization' : `Bearer ${token}`,
       'Content-Type' : 'application/json'

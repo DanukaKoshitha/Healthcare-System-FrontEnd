@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-user-home-page',
@@ -9,4 +9,12 @@ import { RouterLink, RouterOutlet } from '@angular/router';
 })
 export class UserHomePageComponent {
 
+  constructor(private router : Router){}
+
+  signout(){
+    localStorage.removeItem("Token");
+    localStorage.clear();
+
+    window.location.href = '/';
+  }
 }
