@@ -76,4 +76,23 @@ export class UserService {
       withCredentials : true
     });
   }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  updateUser(body : User) : Observable<User>{
+
+    const token = localStorage.getItem("Token");
+
+    console.log(body);  
+
+    const headers = new HttpHeaders({
+      'Authorization' : `Bearer ${token}`,
+      'Content-Type' : 'application/json'
+    })
+
+    return this.http.put<User>('http://localhost:8080/user/update',body,{
+      headers : headers,
+      withCredentials : true
+    })
+  }
 }

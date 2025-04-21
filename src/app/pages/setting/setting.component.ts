@@ -12,6 +12,7 @@ import { UserService } from '../../service/UserService';
   styleUrl: './setting.component.css',
   providers : [UserService]
 })
+
 export class SettingComponent implements OnInit{
 
   firstName : string = ""
@@ -41,6 +42,21 @@ export class SettingComponent implements OnInit{
 
   update(){
 
+    const body = {
+      id : Number(localStorage.getItem("UserId")),
+      firstName : this.firstName,
+      lastName : this.lastName,
+      contact : this.contact,
+      address : this.address,
+      role : this.role,
+      gender : this.gender,
+      email : this.email,
+      password : this.password
+    }
+
+    this.userService.updateUser(body).subscribe(res => {
+      console.log(res);
+    })
   }
 
 }
