@@ -16,8 +16,8 @@ export class AppointmentService{
     return this.http.post('http://localhost:8080/appointment/save',body);
   }
 
-  getAllAppointments() : Observable<Appointment[]>{
-    return this.http.get<Appointment[]>('http://localhost:8080/appointment/get-all');
+  getAllAppointments(userId : number) : Observable<Appointment[]>{
+    return this.http.get<Appointment[]>('http://localhost:8080/appointment/get-all?userId='+ userId);
   }
 
   getDoctorById(doctorId : number) :Observable<Doctor>{
