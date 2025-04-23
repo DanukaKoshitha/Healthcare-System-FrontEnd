@@ -7,6 +7,9 @@ import { AppointmentDashboardComponent } from './pages/appointment-dashboard/app
 import { PaymentDashBoardComponent } from './pages/payment-dash-board/payment-dash-board.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { SettingComponent } from './pages/setting/setting.component';
+import { DoctorsComponent } from './pages/doctors/doctors.component';
+import { PatientsComponent } from './pages/patients/patients.component';
+import { EmployeeComponent } from './pages/employee/employee.component';
 
 export const routes: Routes = [
   {
@@ -36,6 +39,18 @@ export const routes: Routes = [
       {
         path: 'payment',
         component:PaymentDashBoardComponent
+      },
+      {
+        path : 'doctors',
+        component : DoctorsComponent
+      },
+      {
+        path : 'patients',
+        component : PatientsComponent
+      },
+      {
+        path : 'employee',
+        component : EmployeeComponent
       },
       {
         path:'chat',

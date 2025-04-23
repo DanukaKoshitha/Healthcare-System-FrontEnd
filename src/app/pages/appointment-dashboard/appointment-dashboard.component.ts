@@ -7,19 +7,20 @@ import { Doctor } from '../../model/Doctor';
 import { AppointmentService } from '../../service/AppointmentService';
 import { TimeSlot } from '../../model/TimeSlot';
 import { Appointment } from '../../model/Appointment';
+import { DoctorService } from '../../service/DoctorService';
 
 @Component({
   selector: 'app-appointment-dashboard',
   imports: [FormsModule,CommonModule,HttpClientModule],
   templateUrl: './appointment-dashboard.component.html',
   styleUrl: './appointment-dashboard.component.css',
-  providers:[UserService,AppointmentService],
+  providers:[DoctorService,AppointmentService],
   standalone:true
 })
 
 export class AppointmentDashboardComponent implements OnInit{
 
-  constructor(private userService: UserService , private http: HttpClient,private appointmentService:AppointmentService){
+  constructor(private doctorService : DoctorService , private http: HttpClient,private appointmentService:AppointmentService){
   }
 
   doctors : Doctor[] = [];
@@ -57,7 +58,7 @@ export class AppointmentDashboardComponent implements OnInit{
   }
 
   ngOnInit() {
-    this.userService.getDoctors().subscribe((res : Doctor[]) =>{
+    this.doctorService.getDoctors().subscribe((res : Doctor[]) =>{
         this.doctors  =  res;
     }, error => {
       console.error("Error fetching doctors:", error);
