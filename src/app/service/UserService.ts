@@ -36,29 +36,19 @@ export class UserService {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  // getDoctors(): Observable<Doctor[]> {
+  getUsers(){
+    const token = localStorage.getItem("Token");
 
-  //   const token = localStorage.getItem("Token");
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
 
-  //   if (!token) {
-  //     return throwError(() => new Error("Unauthorized!"));
-  //   }
-
-  //   const headers = new HttpHeaders({
-  //     'Authorization': `Bearer ${token}`,
-  //     'Content-Type': 'application/json'
-  //   });
-
-  //   return this.http.get<Doctor[]>('http://localhost:8080/doctor/get-all', {
-  //     headers: headers,
-  //     withCredentials: true  // Important for CORS with credentials
-  //   }).pipe(
-  //     catchError(error => {
-  //       console.error('Error fetching doctors:', error);
-  //       return throwError(() => error);
-  //     })
-  //   )
-  // }
+    return this.http.get<User[]>('http://localhost:8080/user/get-all',{
+      headers : headers,
+      withCredentials : true
+    })
+  }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -92,5 +82,27 @@ export class UserService {
       headers : headers,
       withCredentials : true
     })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  saveUser(body : any){
+    return this.http.post<User>('http://localhost:8080/user/register',body)
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  deleteUser(userId : number){
+    const token = localStorage.getItem("Token");
+
+    const headers = new HttpHeaders({
+      'Authorization' : `Bearer ${token}`,
+      'Content-Type' : 'application/json'
+    })
+
+    return this.http.delete('http://localhost:8080/user/delete?id=' + userId,{
+      headers : headers,
+      withCredentials : true
+    });
   }
 }

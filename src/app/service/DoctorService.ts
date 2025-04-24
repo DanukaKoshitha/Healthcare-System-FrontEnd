@@ -30,9 +30,10 @@ export class DoctorService{
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  doctorRegister(body :any) {
-    return this.http.post<Doctor>('http://localhost:8080/doctor/register', body);
+  doctorRegister(body : any) {
+    return this.http.post<Doctor[]>('http://localhost:8080/doctor/register', body);
   }
+
 }
 
 

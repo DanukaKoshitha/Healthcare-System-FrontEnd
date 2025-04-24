@@ -1,1 +1,293 @@
-<p>patients works!</p>
+<body class="bg-gray-100 dark:bg-gray-900 min-h-screen p-6">
+  <div id="modal-backdrop" class="hidden fixed inset-0 bg-black/30 backdrop-blur-sm z-40"></div>
+
+  <div class="max-w-7xl mx-auto">
+
+    <div class="flex items-center justify-between mb-6">
+      <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Patients</h1>
+      <button (click)="showModel()" type="button" class="px-5 py-2.5 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700 transition duration-300">
+        + Add Patient
+      </button>
+    </div>
+
+    <div class="overflow-x-auto shadow-md rounded-lg bg-white dark:bg-gray-800">
+      <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-300">
+          <tr>
+            <th scope="col" class="px-6 py-4">First Name</th>
+            <th scope="col" class="px-6 py-4">Address</th>
+            <th scope="col" class="px-6 py-4">Contact</th>
+            <th scope="col" class="px-6 py-4">Action</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let user of users" class="divide-y divide-gray-200 dark:divide-gray-700">
+          <!-- Example row -->
+          <tr  class="hover:bg-gray-100 dark:hover:bg-gray-700 transition duration-200">
+            <td class="px-6 py-4 font-medium text-gray-900 dark:text-white">{{user.firstName}}</td>
+            <td class="px-6 py-4">{{user.address}}</td>
+            <td class="px-6 py-4">{{user.contact}}
+            </td>
+            <td class="px-6 py-4">
+              <button (click)="showUserDeatails(user.id)" class="text-blue-600 hover:underline dark:text-blue-400">View</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- /////////////////////////////  model  //////////////////////////////////////// -->
+
+    <div id="patient-modal" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+      <div class="relative w-full max-w-3xl mx-auto max-h-[90vh]">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full flex flex-col">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600 sticky top-0 bg-white dark:bg-gray-700 z-10">
+            <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+              Patient Registration
+            </h3>
+            <button type="button" (click)="closeModel()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              <!-- Close icon -->
+            </button>
+          </div>
+
+          <!-- Scrollable Body -->
+          <div class="flex-1 overflow-y-auto p-6">
+            <form class="space-y-6">
+              <!-- Personal Information Section -->
+              <div class="space-y-4 border-b border-gray-200 dark:border-gray-600 pb-6">
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h4>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                    <input type="text"
+                           placeholder="Enter first name"
+                           [(ngModel)]="patient_firstName" name="patient_firstName"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           required>
+                  </div>
+
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                    <input type="text"
+                           placeholder="Enter last name"
+                           [(ngModel)]="patient_lastName" name="patient_lastName"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           required>
+                  </div>
+
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+                    <select
+                    [(ngModel)]="patient_gender" name="patient_gender"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                      <option value="" disabled selected>Select gender</option>
+                      <option value="MALE">Male</option>
+                      <option value="FEMALE">Female</option>
+                      <option value="OTHER">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
+                    <input type="tel"
+                           [(ngModel)]="patient_contact" name="patient_contact"
+                           placeholder="e.g., 0771234567"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           pattern="[0-9]{10}" maxlength="10" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address -->
+              <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Address</label>
+                <textarea rows="1"
+                          [(ngModel)]="patient_address" name="patient_address"
+                          placeholder="Enter full address"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                          required></textarea>
+              </div>
+
+              <!-- Account Information Section -->
+              <div class="space-y-4">
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Account Details</h4>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email Address</label>
+                    <input type="email"
+                          [(ngModel)]="patient_email" name="patient_email"
+                           placeholder="e.g., example@gmail.com"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           required>
+                  </div>
+
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                    <input type="password"
+                          [(ngModel)]="patient_password" name="patient_password"
+                           placeholder="Enter a secure password"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           required>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- Fixed Footer -->
+          <div class="sticky bottom-0 bg-white dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600 p-6">
+            <div class="flex items-center gap-3">
+              <button (click)="savePatient()" type="button"
+                      class="text-white bg-blue-600 hover:bg-blue-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 transition-colors">
+                Register Patient
+              </button>
+              <button (click)="closeModel()" type="button"
+                      class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 transition-colors">
+                Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- //////////////////////////////////  user Deatils Model   /////////////////////////////// -->
+
+
+    <div id="patient-Details-modal" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+      <div class="relative w-full max-w-3xl mx-auto max-h-[90vh]">
+        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full flex flex-col">
+          <!-- Modal Header -->
+          <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600 sticky top-0 bg-white dark:bg-gray-700 z-10">
+            <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+              Patient Registration
+            </h3>
+            <button type="button" (click)="closeModel()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
+              <!-- Close icon -->
+            </button>
+          </div>
+
+          <!-- Scrollable Body -->
+          <div class="flex-1 overflow-y-auto p-6">
+            <form class="space-y-6">
+              <!-- Personal Information Section -->
+              <div class="space-y-4 border-b border-gray-200 dark:border-gray-600 pb-6">
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Personal Information</h4>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
+                    <input type="text"
+                           placeholder="Enter first name"
+                           [(ngModel)]="patient_firstName" name="patient_firstName"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           required>
+                  </div>
+
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
+                    <input type="text"
+                           placeholder="Enter last name"
+                           [(ngModel)]="patient_lastName" name="patient_lastName"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           required>
+                  </div>
+
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
+                    <select
+                    [(ngModel)]="patient_gender" name="patient_gender"
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
+                      <option value="" disabled selected>Select gender</option>
+                      <option value="MALE">Male</option>
+                      <option value="FEMALE">Female</option>
+                      <option value="OTHER">Other</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
+                    <input type="tel"
+                           [(ngModel)]="patient_contact" name="patient_contact"
+                           placeholder="e.g., 0771234567"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           pattern="[0-9]{10}" maxlength="10" required>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Address -->
+              <div>
+                <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Address</label>
+                <textarea rows="1"
+                          [(ngModel)]="patient_address" name="patient_address"
+                          placeholder="Enter full address"
+                          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                          required></textarea>
+              </div>
+
+              <!-- Account Information Section -->
+              <div class="space-y-4">
+                <h4 class="text-lg font-semibold text-gray-900 dark:text-white">Account Details</h4>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email Address</label>
+                    <input type="email"
+                          [(ngModel)]="patient_email" name="patient_email"
+                           placeholder="e.g., example@gmail.com"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           required>
+                  </div>
+
+                  <div>
+                    <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
+                    <input type="password"
+                           placeholder="Enter a secure password"
+                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                           required>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+          <!-- Fixed Footer -->
+          <div class="sticky bottom-0 bg-white dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600 p-6">
+            <div class="flex items-center gap-3">
+
+              <!-- Update Button -->
+              <button (click)="updatePatient()" type="button"
+                      class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 transition-colors">
+                Update Patient
+              </button>
+
+              <!-- Delete Button -->
+              <button (click)="deletePatient()" type="button"
+                      class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 transition-colors">
+                Delete Patient
+              </button>
+
+              <!-- Cancel Button -->
+              <button (click)="closeUserDeatilsModel()" type="button"
+                      class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 transition-colors">
+                Cancel
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</body>
+
+
