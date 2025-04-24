@@ -89,4 +89,20 @@ export class UserService {
   saveUser(body : any){
     return this.http.post<User>('http://localhost:8080/user/register',body)
   }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  deleteUser(userId : number){
+    const token = localStorage.getItem("Token");
+
+    const headers = new HttpHeaders({
+      'Authorization' : `Bearer ${token}`,
+      'Content-Type' : 'application/json'
+    })
+
+    return this.http.delete('http://localhost:8080/user/delete?id=' + userId,{
+      headers : headers,
+      withCredentials : true
+    });
+  }
 }

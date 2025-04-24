@@ -38,8 +38,11 @@ export class PatientsComponent implements OnInit{
 
   constructor(private userService : UserService){}
 
+  ////////////////////////////////////////////////////////////////////////////////
+
   ngOnInit(): void {
       this.userService.getUsers().subscribe( (res : User[]) =>{
+
         this.users = res;
 
         res.forEach(userObject => {
@@ -54,6 +57,8 @@ export class PatientsComponent implements OnInit{
         })
       })
   }
+
+  ////////////////////////////////////////////////////////////////////////////////
 
   showModel(){
 
@@ -76,6 +81,8 @@ export class PatientsComponent implements OnInit{
     }
   }
 
+  ////////////////////////////////////////////////////////////////////////////////
+
   savePatient(){
     const body = {
       firstName : this.patient_firstName,
@@ -88,9 +95,95 @@ export class PatientsComponent implements OnInit{
       password : this.patient_password
     }
 
-    this.userService.saveUser(body).subscribe(res =>{
-      console.log(res);
+    this.userService.saveUser(body).subscribe({
+      next:(res) =>{
+        console.log("Success!");
+      },
+      error : (err) =>{
+        console.log("Error while saving user",err);
+      }
     })
+
+    window.location.reload();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  showUserDeatails(userId : number){
+
+    localStorage.setItem("PatientId",userId+"");
+
+    document.getElementById("modal-backdrop")?.classList.remove('hidden');
+
+    const model = document.getElementById("patient-Details-modal");
+
+    if(model){
+      model.classList.remove('hidden');
+    }
+
+    this.userService.userSearchById(userId).subscribe(res =>{
+      this.patient_firstName = res.firstName;
+      this.patient_lastName = res.lastName;
+      this.patient_contact = res.contact;
+      this.patient_address = res.address;
+      this.patient_gender = res.gender;
+      this.patient_role = res.role;
+      this.patient_email = res.email;
+      this.patient_password = res.password
+    })
+  }
+
+  closeUserDeatilsModel(){
+
+    localStorage.removeItem("PatientId");
+
+    document.getElementById("modal-backdrop")?.classList.add("hidden");
+
+    const model = document.getElementById("patient-Details-modal");
+
+    if(model){
+      model.classList.add("hidden");
+    }
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  updatePatient(){
+    const body = {
+      id:Number(localStorage.getItem("PatientId")),
+      firstName : this.patient_firstName,
+      lastName : this.patient_lastName,
+      contact : this.patient_contact,
+      address : this.patient_address,
+      role : this.patient_role,
+      gender : this.patient_gender,
+      email : this.patient_email,
+      password : this.patient_password
+    }
+
+    this.userService.updateUser(body).subscribe(res =>{
+      this.patient_firstName = res.firstName;
+      this.patient_lastName = res.lastName;
+      this.patient_contact = res.contact;
+      this.patient_address = res.address;
+      this.patient_gender = res.gender;
+      this.patient_role = res.role;
+      this.patient_email = res.email;
+      this.patient_password = res.password
+    })
+
+    window.location.reload();
+  }
+
+  ////////////////////////////////////////////////////////////////////////////////
+
+  deletePatient(){
+
+    this.userService.deleteUser(Number(localStorage.getItem("PatientId"))).subscribe(res =>{
+      console.log(res);
+
+    })
+    window.location.reload();
   }
 
 }
