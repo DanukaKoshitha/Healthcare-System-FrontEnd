@@ -12,10 +12,11 @@ export class Doctor{
   timeSlots: TimeSlot[];
   image: string;
   email: string;
+  password : string;
   yearsOfExperience: number;
   price: number;
 
-  constructor(id:number,name:string,contact: string, address: string, specialization: string, qualifications: Qualification[],timeSlots: TimeSlot[],image: string,email : string ,yearsOfExperience : number, price : number ){
+  constructor(id:number,name:string,contact: string, address: string, specialization: string, qualifications: Qualification[],timeSlots: TimeSlot[],image: string,email : string,password : string ,yearsOfExperience : number, price : number ){
     this.id = id;
     this.name = name;
     this.contact = contact;
@@ -25,6 +26,7 @@ export class Doctor{
     this.timeSlots = timeSlots;
     this.image = image;
     this.email = email;
+    this.password = password
     this.yearsOfExperience = yearsOfExperience;
     this.price = price;
   }

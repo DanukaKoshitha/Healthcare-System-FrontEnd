@@ -36,29 +36,29 @@ export class UserService {
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  getDoctors(): Observable<Doctor[]> {
+  // getDoctors(): Observable<Doctor[]> {
 
-    const token = localStorage.getItem("Token");
+  //   const token = localStorage.getItem("Token");
 
-    if (!token) {
-      return throwError(() => new Error("Unauthorized!"));
-    }
+  //   if (!token) {
+  //     return throwError(() => new Error("Unauthorized!"));
+  //   }
 
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Bearer ${token}`,
+  //     'Content-Type': 'application/json'
+  //   });
 
-    return this.http.get<Doctor[]>('http://localhost:8080/doctor/get-all', {
-      headers: headers,
-      withCredentials: true  // Important for CORS with credentials
-    }).pipe(
-      catchError(error => {
-        console.error('Error fetching doctors:', error);
-        return throwError(() => error);
-      })
-    )
-  }
+  //   return this.http.get<Doctor[]>('http://localhost:8080/doctor/get-all', {
+  //     headers: headers,
+  //     withCredentials: true  // Important for CORS with credentials
+  //   }).pipe(
+  //     catchError(error => {
+  //       console.error('Error fetching doctors:', error);
+  //       return throwError(() => error);
+  //     })
+  //   )
+  // }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
