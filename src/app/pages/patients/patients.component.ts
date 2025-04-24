@@ -43,9 +43,12 @@ export class PatientsComponent implements OnInit{
   ngOnInit(): void {
       this.userService.getUsers().subscribe( (res : User[]) =>{
 
-        this.users = res;
-
         res.forEach(userObject => {
+
+          if(userObject.role == "PATIENT"){
+            this.users.push(userObject);
+          }
+
             this.firstName = userObject.firstName;
             this.lastName = userObject.lastName;
             this.contact = userObject.contact;
