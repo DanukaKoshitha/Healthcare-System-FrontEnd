@@ -83,4 +83,10 @@ export class UserService {
       withCredentials : true
     })
   }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  saveUser(body : any){
+    return this.http.post<User>('http://localhost:8080/user/register',body)
+  }
 }

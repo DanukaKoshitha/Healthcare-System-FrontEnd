@@ -25,10 +25,23 @@ export class PatientsComponent implements OnInit{
   email : string = "";
   password : string = "";
 
+  patient_firstName = "";
+  patient_lastName = "";
+  patient_contact = "";
+  patient_address = "";
+  patient_role = "PATIENT";
+  patient_gender = "";
+  patient_email = "";
+  patient_password = "";
+
+  users : User[] = [];
+
   constructor(private userService : UserService){}
 
   ngOnInit(): void {
       this.userService.getUsers().subscribe( (res : User[]) =>{
+        this.users = res;
+
         res.forEach(userObject => {
             this.firstName = userObject.firstName;
             this.lastName = userObject.lastName;
@@ -64,7 +77,20 @@ export class PatientsComponent implements OnInit{
   }
 
   savePatient(){
+    const body = {
+      firstName : this.patient_firstName,
+      lastName : this.patient_lastName,
+      contact : this.patient_contact,
+      address : this.patient_address,
+      role : this.patient_role,
+      gender : this.patient_gender,
+      email : this.patient_email,
+      password : this.patient_password
+    }
 
+    this.userService.saveUser(body).subscribe(res =>{
+      console.log(res);
+    })
   }
 
 }
