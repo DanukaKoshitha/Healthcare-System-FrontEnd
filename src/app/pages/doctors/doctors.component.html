@@ -4,292 +4,607 @@
 
   <!-- Navbar -->
   <nav class="bg-white border-gray-200 dark:bg-gray-900">
-    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-
+    <div
+      class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4"
+    >
       <div class="dropdown">
-        <button type="button" class="dropdown-button">
-          All Doctors
-        </button>
+        <button type="button" class="dropdown-button">All Doctors</button>
         <!-- Dropdown -->
         <div class="dropdown-menu">
           <ul class="p-2">
-            <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">All Doctors</a></li>
-            <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Cardiologist</a></li>
-            <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Dermatologist</a></li>
-            <li><a href="#" class="px-4 py-2 text-sm hover:bg-gray-100">Orthopedic</a></li>
+            <li>
+              <a href="#" class="px-4 py-2 text-sm hover:bg-gray-100"
+                >All Doctors</a
+              >
+            </li>
+            <li>
+              <a href="#" class="px-4 py-2 text-sm hover:bg-gray-100"
+                >Cardiologist</a
+              >
+            </li>
+            <li>
+              <a href="#" class="px-4 py-2 text-sm hover:bg-gray-100"
+                >Dermatologist</a
+              >
+            </li>
+            <li>
+              <a href="#" class="px-4 py-2 text-sm hover:bg-gray-100"
+                >Orthopedic</a
+              >
+            </li>
           </ul>
         </div>
       </div>
-      <button type="button" class="dropdown-button" (click)="showDoctorAddModel()">
+      <button
+        type="button"
+        class="dropdown-button"
+        (click)="showDoctorAddModel()"
+      >
         Add
       </button>
     </div>
   </nav>
 
+  <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
   <!-- Cards Container -->
-  <div class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div
+    class="container mx-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+  >
     <!-- Doctor Card -->
-    <div class="card bg-white rounded-lg shadow dark:bg-gray-800" *ngFor="let doctor of doctors">
-      <img [src]="doctor.image" alt="Doctor Image" class="w-full h-48 object-cover rounded-t-lg">
+    <div
+      class="card bg-white rounded-lg shadow dark:bg-gray-800"
+      *ngFor="let doctor of doctors"
+    >
+      <img
+        [src]="doctor.image"
+        alt="Doctor Image"
+        class="w-full h-48 object-cover rounded-t-lg"
+      />
       <div class="p-5">
-        <h5 class="card-title text-xl font-bold tracking-tight text-gray-900 dark:text-white">{{doctor.name}}</h5>
-        <p class="card-text mt-2 text-gray-700 dark:text-gray-400">{{doctor.specialization}} with {{doctor.yearsOfExperience}} years experience</p>
-        <a (click)="showModel(doctor)" class="btn mt-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        <h5
+          class="card-title text-xl font-bold tracking-tight text-gray-900 dark:text-white"
+        >
+          {{ doctor.name }}
+        </h5>
+        <p class="card-text mt-2 text-gray-700 dark:text-gray-400">
+          {{ doctor.specialization }} with {{ doctor.yearsOfExperience }} years
+          experience
+        </p>
+        <a
+          (click)="showModel(doctor)"
+          class="btn mt-4 inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        >
           Read More
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10" class="w-4 h-4 ml-2">
-            <path stroke="white" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 14 10"
+            class="w-4 h-4 ml-2"
+          >
+            <path
+              stroke="white"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M1 5h12m0 0L9 1m4 4L9 9"
+            />
           </svg>
         </a>
       </div>
     </div>
   </div>
 
-  <!-- Modal -->
-  <div id="extralarge-modal" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center">
+
+  <!-- /////////////////////////////  Doctor Details Model    //////////////////////////////////////////////////// -->
+
+  <div
+    id="extralarge-modal"
+    tabindex="-1"
+    class="hidden fixed inset-0 z-50 flex items-center justify-center"
+  >
     <div class="relative w-full max-w-5xl mx-auto max-h-full">
       <!-- Modal Content -->
       <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
         <!-- Modal Header -->
-        <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600">
+        <div
+          class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600"
+        >
           <h3 class="text-xl font-medium text-gray-900 dark:text-white">
             Doctor Details
           </h3>
-          <button type="button" (click)="closeModel()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+          <button
+            type="button"
+            (click)="closeModel()"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
             </svg>
             <span class="sr-only">Close modal</span>
           </button>
         </div>
 
         <!-- Modal Body -->
-        <div class="p-6 space-y-6 overflow-y-auto max-h-[60vh]" *ngIf="selectedDoctor">
+        <div
+          class="p-6 space-y-6 overflow-y-auto max-h-[60vh]"
+          *ngIf="selectedDoctor"
+        >
           <div class="flex flex-col md:flex-row gap-6">
             <div class="w-full md:w-1/3">
-              <img [src]="selectedDoctor.image || 'https://i.insider.com/67a3b8f37bb3f854015bde3d?width=700'" class="w-full rounded-lg" alt="Doctor Image">
+              <img
+                [src]="
+                  selectedDoctor.image ||
+                  'https://i.insider.com/67a3b8f37bb3f854015bde3d?width=700'
+                "
+                class="w-full rounded-lg"
+                alt="Doctor Image"
+              />
             </div>
             <div class="w-full md:w-2/3 space-y-4">
-              <h4 class="text-lg font-semibold text-gray-900 dark:text-white">About {{ selectedDoctor.name }}</h4>
-              <p class="text-base leading-relaxed text-gray-500 dark:text-gray-400">
-                {{ selectedDoctor.specialization }} with {{ selectedDoctor.yearsOfExperience }} years of experience.
+              <h4 class="text-lg font-semibold text-gray-900 dark:text-white">
+                About {{ selectedDoctor.name }}
+              </h4>
+              <p
+                class="text-base leading-relaxed text-gray-500 dark:text-gray-400"
+              >
+                {{ selectedDoctor.specialization }} with
+                {{ selectedDoctor.yearsOfExperience }} years of experience.
               </p>
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <h5 class="font-medium text-gray-900 dark:text-white">Availability</h5>
+                  <h5 class="font-medium text-gray-900 dark:text-white">
+                    Availability
+                  </h5>
                   <ul class="mt-2 space-y-2">
-                    <li *ngFor="let timeSlot of selectedDoctor.timeSlots" class="flex items-center text-gray-500 dark:text-gray-400">
-                      <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                        <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
+                    <li
+                      *ngFor="let timeSlot of selectedDoctor.timeSlots"
+                      class="flex items-center text-gray-500 dark:text-gray-400"
+                    >
+                      <svg
+                        class="w-4 h-4 mr-2"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z"
+                          clip-rule="evenodd"
+                        />
                       </svg>
-                      🗓️ {{ timeSlot.day }} ➝ ⏰ {{ timeSlot.startTime }} - {{ timeSlot.endTime }}
+                      🗓️ {{ timeSlot.day }} ➝ ⏰ {{ timeSlot.startTime }} -
+                      {{ timeSlot.endTime }}
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h5 class="font-medium text-gray-900 dark:text-white">Qualifications</h5>
+                  <h5 class="font-medium text-gray-900 dark:text-white">
+                    Qualifications
+                  </h5>
                   <ul class="list-disc pl-5 text-gray-500 dark:text-gray-400">
-                    <li *ngFor="let qualification of selectedDoctor.qualifications">
-                      🎓 {{ qualification.name }} | 🏛️ {{ qualification.institution }} | 📅 {{ qualification.yearObtained }}
+                    <li
+                      *ngFor="
+                        let qualification of selectedDoctor.qualifications
+                      "
+                    >
+                      🎓 {{ qualification.name }} | 🏛️
+                      {{ qualification.institution }} | 📅
+                      {{ qualification.yearObtained }}
                     </li>
                   </ul>
                 </div>
 
                 <div>
-                  <h5 class="font-medium text-gray-900 dark:text-white">💰 Appointment Fee</h5>
-                  <div class="mt-2 flex items-center text-gray-500 dark:text-gray-400">
-                    <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/>
-                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd"/>
+                  <h5 class="font-medium text-gray-900 dark:text-white">
+                    💰 Appointment Fee
+                  </h5>
+                  <div
+                    class="mt-2 flex items-center text-gray-500 dark:text-gray-400"
+                  >
+                    <svg
+                      class="w-4 h-4 mr-2"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"
+                      />
+                      <path
+                        fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z"
+                        clip-rule="evenodd"
+                      />
                     </svg>
                     💵 {{ "LKR " + selectedDoctor.price }}
                   </div>
-                  <br>
+                  <br />
                 </div>
               </div>
             </div>
           </div>
 
-
-          <div class="flex items-center p-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-
-          </div>
+          <div
+            class="flex items-center p-2 border-t border-gray-200 rounded-b dark:border-gray-600"
+          ></div>
 
           <!-- Time Slots -->
           <div class="mt-6">
-            <label class="block m-2 p-3 pl-0 text-sm font-medium text-gray-900 dark:text-white">Available Time Slots</label>
+            <label
+              class="block m-2 p-3 pl-0 text-sm font-medium text-gray-900 dark:text-white"
+              >Available Time Slots</label
+            >
             <div class="flex flex-wrap gap-3">
-              <button *ngFor="let timeSlot of selectedDoctor?.timeSlots"
-                      type="button"
-                      class="flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">
-                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10 2a8 8 0 1 0 8 8 8 8 0 0 0-8-8ZM9 5h2v6H9V5Zm1 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"/>
+              <button
+                *ngFor="let timeSlot of selectedDoctor?.timeSlots"
+                type="button"
+                class="flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-2 focus:ring-blue-700 focus:text-blue-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+              >
+                <svg
+                  class="w-4 h-4 mr-2"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    d="M10 2a8 8 0 1 0 8 8 8 8 0 0 0-8-8ZM9 5h2v6H9V5Zm1 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                  />
                 </svg>
-                <span>⏰ {{ timeSlot.day }} {{ timeSlot.startTime }} - {{ timeSlot.endTime }}</span>
+                <span
+                  >⏰ {{ timeSlot.day }} {{ timeSlot.startTime }} -
+                  {{ timeSlot.endTime }}</span
+                >
               </button>
             </div>
           </div>
         </div>
 
         <!-- Modal Footer -->
-        <div class="flex items-center p-6 gap-3 border-t border-gray-200 rounded-b dark:border-gray-600">
-          <button (click)="closeModel()" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 focus:z-10 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">Cancel</button>
+        <div class="sticky bottom-0 bg-white dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600 p-6">
+          <div class="flex items-center gap-3">
+
+            <!-- Delete Button -->
+            <button (click)="deleteDoctor()" type="button"
+                    class="text-white bg-red-600 hover:bg-red-700 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 transition-colors">
+              Delete Doctor
+            </button>
+
+            <!-- Cancel Button -->
+            <button (click)="closeModel()" type="button"
+                    class="text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600 transition-colors">
+              Cancel
+            </button>
+
+          </div>
         </div>
       </div>
     </div>
   </div>
 
 
-  <!-- /////////////////////////////////////////////////////////////////////////// -->
+  <!-- /////////////////////////////  Doctor Register Model  ///////////////////////////////////////////////////// -->
 
+  <div
+    id="doctorAdding-modal"
+    tabindex="-1"
+    class="hidden fixed inset-0 z-50 flex items-center justify-center"
+  >
+    <div class="relative w-full max-w-5xl mx-auto max-h-[90vh]">
+      <!-- Added max-height -->
+      <!-- Modal Content -->
+      <div
+        class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full flex flex-col"
+      >
+        <!-- Modal Header (Fixed) -->
+        <div
+          class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600 sticky top-0 bg-white dark:bg-gray-700 z-10"
+        >
+          <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+            Doctor Details
+          </h3>
+          <button
+            type="button"
+            (click)="closeDoctorAddingModel()"
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          >
+            <svg
+              class="w-3 h-3"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 14 14"
+            >
+              <path
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+              />
+            </svg>
+            <span class="sr-only">Close modal</span>
+          </button>
+        </div>
 
-<!-- Modal -->
-<div id="doctorAdding-modal" tabindex="-1" class="hidden fixed inset-0 z-50 flex items-center justify-center">
-  <div class="relative w-full max-w-5xl mx-auto max-h-[90vh]"> <!-- Added max-height -->
-    <!-- Modal Content -->
-    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full flex flex-col"> <!-- Added flex layout -->
-      <!-- Modal Header (Fixed) -->
-      <div class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600 sticky top-0 bg-white dark:bg-gray-700 z-10">
-        <h3 class="text-xl font-medium text-gray-900 dark:text-white">
-          Doctor Details
-        </h3>
-        <button type="button" (click)="closeDoctorAddingModel()" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white">
-          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-          </svg>
-          <span class="sr-only">Close modal</span>
-        </button>
-      </div>
+        <!-- Scrollable Body -->
+        <div class="flex-1 overflow-y-auto p-6">
+          <!-- Added scrollable area -->
+          <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- ... (Keep all your existing form content here) ... -->
 
-      <!-- Scrollable Body -->
-      <div class="flex-1 overflow-y-auto p-6"> <!-- Added scrollable area -->
-        <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Modal Body -->
 
-          <!-- ... (Keep all your existing form content here) ... -->
-
-                           <!-- Modal Body -->
-
-          <!-- Left Column -->
-          <div class="space-y-4">
+            <!-- Left Column -->
+            <div class="space-y-4">
               <!-- Name -->
               <div class="pb-4">
-                  <label class="block text-sm font-medium text-gray-900 dark:text-white">Full Name</label>
-                  <input type="text" [(ngModel)]="fullName" name="fullName" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Dr. Emily Watson" required>
+                <label
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  [(ngModel)]="fullName"
+                  name="fullName"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="Dr. Emily Watson"
+                  required
+                />
               </div>
 
               <!-- Contact -->
               <div class="pb-4">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
-                  <input type="tel" [(ngModel)]="Doctor_contact" name="contact" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="+94 771453625" required>
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Contact Number</label
+                >
+                <input
+                  type="tel"
+                  [(ngModel)]="Doctor_contact"
+                  name="contact"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="+94 771453625"
+                  required
+                />
               </div>
 
               <!-- Address -->
               <div class="pb-4">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                  <textarea [(ngModel)]="Doctor_address" name="Doctor_address" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" rows="3" placeholder="456 Health Avenue, Boston, MA 02120, USA"></textarea>
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Address</label
+                >
+                <textarea
+                  [(ngModel)]="Doctor_address"
+                  name="Doctor_address"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  rows="3"
+                  placeholder="456 Health Avenue, Boston, MA 02120, USA"
+                ></textarea>
               </div>
 
               <!-- Specialization -->
               <div class="pb-4">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Specialization</label>
-                  <select [(ngModel)]="Doctor_specialization" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                      <option selected>Cardiology</option>
-                      <option>Neurology</option>
-                      <option>Pediatrics</option>
-                      <option>Orthopedics</option>
-                  </select>
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Specialization</label
+                >
+                <select
+                  [(ngModel)]="Doctor_specialization"
+                  name="Doctor_specialization"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                >
+                  <option selected>Cardiology</option>
+                  <option>Neurology</option>
+                  <option>Pediatrics</option>
+                  <option>Orthopedics</option>
+                </select>
               </div>
 
               <!-- Qualifications -->
               <div class="space-y-2 pb-4">
-                  <label class="block text-sm font-medium text-gray-900 dark:text-white">Qualifications</label>
-                  <div class="space-y-2 qualifications-container">
-                      <div class="flex gap-2 pb-4">
-                          <input [(ngModel)]="degree" name="degree" type="text" placeholder="Degree" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                          <input [(ngModel)]="institution" name="institution" type="text" placeholder="Institution" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                          <input [(ngModel)]="year" name="year" type="number" placeholder="Year" min="1900" max="2099" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                      </div>
+                <label
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Qualifications</label
+                >
+                <div class="space-y-2 qualifications-container">
+                  <div class="flex gap-2 pb-4">
+                    <input
+                      [(ngModel)]="degree"
+                      name="degree"
+                      type="text"
+                      placeholder="Degree"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    />
+                    <input
+                      [(ngModel)]="institution"
+                      name="institution"
+                      type="text"
+                      placeholder="Institution"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    />
+                    <input
+                      [(ngModel)]="year"
+                      name="year"
+                      type="number"
+                      placeholder="Year"
+                      min="1900"
+                      max="2099"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    />
                   </div>
-                  <button (click)="addQualification()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
-                      Add Qualification
-                  </button>
+                </div>
+                <button
+                  (click)="addQualification()"
+                  type="button"
+                  class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                >
+                  Add Qualification
+                </button>
               </div>
-          </div>
+            </div>
 
-          <!-- Right Column -->
-          <div class="space-y-4 pb-4">
+            <!-- Right Column -->
+            <div class="space-y-4 pb-4">
               <!-- Availability -->
               <div class="space-y-2 pb-4">
-                  <label class="block text-sm font-medium text-gray-900 dark:text-white">Availability</label>
-                  <div class="space-y-2 time-slots-container pb-4">
-                      <div class="flex gap-2">
-                          <select [(ngModel)]="day" name="day" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                            <option value="MONDAY">Monday</option>
-                            <option value="TUESDAY">Tuesday</option>
-                            <option value="WEDNESDAY">Wednesday</option>
-                            <option value="THURSDAY">Thursday</option>
-                            <option value="FRIDAY">Friday</option>
-                            <option value="SATURDAY">Saturday</option>
-                            <option value="SUNDAY">Sunday</option>
-                          </select>
-                          <input [(ngModel)]="startTime" name="startTime" type="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                          <input [(ngModel)]="endTime" name="endTime" type="time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
-                      </div>
+                <label
+                  class="block text-sm font-medium text-gray-900 dark:text-white"
+                  >Availability</label
+                >
+                <div class="space-y-2 time-slots-container pb-4">
+                  <div class="flex gap-2">
+                    <select
+                      [(ngModel)]="day"
+                      name="day"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    >
+                      <option value="MONDAY">Monday</option>
+                      <option value="TUESDAY">Tuesday</option>
+                      <option value="WEDNESDAY">Wednesday</option>
+                      <option value="THURSDAY">Thursday</option>
+                      <option value="FRIDAY">Friday</option>
+                      <option value="SATURDAY">Saturday</option>
+                      <option value="SUNDAY">Sunday</option>
+                    </select>
+                    <input
+                      [(ngModel)]="startTime"
+                      name="startTime"
+                      type="time"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    />
+                    <input
+                      [(ngModel)]="endTime"
+                      name="endTime"
+                      type="time"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    />
                   </div>
-                  <button (click)="addTime()" type="button" class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
-                      Add Time Slot
-                  </button>
+                </div>
+                <button
+                  (click)="addTime()"
+                  type="button"
+                  class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                >
+                  Add Time Slot
+                </button>
               </div>
 
               <!-- Email & Password -->
               <div class="pb-4">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email</label>
-                  <input [(ngModel)]="Doctor_email" name="Doctor_email" type="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="emilywatson@gmail.com" required>
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Email</label
+                >
+                <input
+                  [(ngModel)]="Doctor_email"
+                  name="Doctor_email"
+                  type="email"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="emilywatson@gmail.com"
+                  required
+                />
               </div>
 
               <div class="pb-4">
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-                  <input [(ngModel)]="Doctor_password" name="Doctor_password" type="password" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="••••••••" required>
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Password</label
+                >
+                <input
+                  [(ngModel)]="Doctor_password"
+                  name="Doctor_password"
+                  type="password"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  placeholder="••••••••"
+                  required
+                />
               </div>
 
               <!-- Experience & Price -->
               <div class="grid grid-cols-2 gap-4 pb-4">
-                  <div>
-                      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Years of Experience</label>
-                      <input [(ngModel)]="Doctor_yearsOfExperience" name="Doctor_yearsOfExperience" type="number" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" min="0" value="10">
-                  </div>
-                  <div>
-                      <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Consultation Fee</label>
-                      <input [(ngModel)]="Doctor_price" name="Doctor_price" type="number" step="0.01" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value="2500.00">
-                  </div>
+                <div>
+                  <label
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Years of Experience</label
+                  >
+                  <input
+                    [(ngModel)]="Doctor_yearsOfExperience"
+                    name="Doctor_yearsOfExperience"
+                    type="number"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    min="0"
+                    value="10"
+                  />
+                </div>
+                <div>
+                  <label
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Consultation Fee</label
+                  >
+                  <input
+                    [(ngModel)]="Doctor_price"
+                    name="Doctor_price"
+                    type="number"
+                    step="0.01"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    value="2500.00"
+                  />
+                </div>
               </div>
 
               <!-- Image Upload -->
               <div>
-                  <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Profile Photo</label>
-                  <input type="file" class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400" type="file">
+                <label
+                  class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                  >Profile Photo</label
+                >
+                <input
+                  type="file"
+                  (change)="onFileSelected($event)"
+                  class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400"
+                />
+
               </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Fixed Footer -->
+        <div
+          class="sticky bottom-0 bg-white dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600 p-6"
+        >
+          <div class="flex items-center gap-3">
+            <button
+              (click)="saveDoctor()"
+              type="submit"
+              class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              Save Doctor
+            </button>
+            <button
+              (click)="closeDoctorAddingModel()"
+              type="button"
+              class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600"
+            >
+              Cancel
+            </button>
           </div>
-
-        </form>
-      </div>
-
-       <!-- Fixed Footer -->
-       <div class="sticky bottom-0 bg-white dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600 p-6">
-        <div class="flex items-center gap-3">
-          <button (click)="saveDoctor()" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-            Save Doctor
-          </button>
-          <button (click)="closeDoctorAddingModel()" type="button" class="ms-3 text-gray-500 bg-white hover:bg-gray-100 focus:ring-4 focus:outline-none focus:ring-blue-300 rounded-lg border border-gray-200 text-sm font-medium px-5 py-2.5 hover:text-gray-900 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-500 dark:hover:text-white dark:hover:bg-gray-600 dark:focus:ring-gray-600">
-            Cancel
-          </button>
         </div>
       </div>
     </div>
   </div>
-</div>
-
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.0/flowbite.min.js"></script>
 </body>
-
