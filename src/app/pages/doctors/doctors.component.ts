@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Doctor } from '../../model/Doctor';
 import { DoctorService } from '../../service/DoctorService';
@@ -23,7 +23,7 @@ export interface TimeSlot {
 
 export class DoctorsComponent implements OnInit{
 
-  constructor(private doctorService : DoctorService){}
+  constructor(private doctorService : DoctorService , private http : HttpClient){}
 
   doctors : Doctor[] = [];
   selectedDoctor : Doctor | null = null;
@@ -78,6 +78,18 @@ export class DoctorsComponent implements OnInit{
     if(model){
       model.classList.add("hidden");
     }
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  updateDoctor(){
+
+  }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////
+
+  deleteDoctor(){
+
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -138,5 +150,23 @@ export class DoctorsComponent implements OnInit{
     this.doctorService.doctorRegister(body).subscribe(res => {
       console.log(res);
     })
+
+    window.location.reload();
   }
+
+  onFileSelected(event: any) {
+    const file: File = event.target.files[0];
+
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('upload_preset', 'doctor_image');
+    formData.append('cloud_name', 'dm1y9uqld');
+
+    this.http.post('https://api.cloudinary.com/v1_1/dm1y9uqld/image/upload', formData)
+      .subscribe((res: any) => {
+        this.Doctor_image = res.secure_url;
+        console.log('Image uploaded. URL:', this.Doctor_image);
+      });
+  }
+
 }
