@@ -61,20 +61,30 @@ export class DoctorsComponent implements OnInit{
   /////////////////////////////////////////////////////////////////////////////////////////////////
 
   showModel(doctor : Doctor){
+
+    localStorage.setItem("DoctorId",doctor.id+"");
+
     this.selectedDoctor = doctor;
+
     document.getElementById('modal-backdrop')?.classList.remove('hidden');
 
     const model = document.getElementById("extralarge-modal");
+
     if(model){
       model.classList.remove("hidden");
     }
   }
 
   closeModel(){
+
+    localStorage.removeItem("DoctorId");
+
     this.selectedDoctor = null;
+
     document.getElementById('modal-backdrop')?.classList.add('hidden');
 
     const model =  document.getElementById("extralarge-modal");
+
     if(model){
       model.classList.add("hidden");
     }
@@ -82,14 +92,12 @@ export class DoctorsComponent implements OnInit{
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
 
-  updateDoctor(){
-
-  }
-
-  /////////////////////////////////////////////////////////////////////////////////////////////////
-
   deleteDoctor(){
+    this.doctorService.deleteDoctorById(Number(localStorage.getItem("DoctorId"))).subscribe(res =>{
+      console.log(res);
+    });
 
+    window.location.reload();
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,6 +106,7 @@ export class DoctorsComponent implements OnInit{
     document.getElementById('modal-backdrop')?.classList.remove('hidden');
 
     const model = document.getElementById("doctorAdding-modal");
+
     if(model){
       model.classList.remove("hidden");
     }
@@ -108,6 +117,7 @@ export class DoctorsComponent implements OnInit{
     document.getElementById('modal-backdrop')?.classList.add('hidden');
 
     const model =  document.getElementById("doctorAdding-modal");
+
     if(model){
       model.classList.add("hidden");
     }
