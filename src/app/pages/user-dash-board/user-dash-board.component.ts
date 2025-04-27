@@ -21,9 +21,10 @@ export class UserDashBoardComponent implements OnInit{
 
   appointmentList : Appointment[] = [];
   doctorMap : Map<number, Doctor> = new Map();
+  userRole : string = "ADMIN";
 
   ngOnInit() {
-      this.appointmentService.getAllAppointments(Number(localStorage.getItem("UserId"))).subscribe((res : Appointment[]) =>{
+      this.appointmentService.getAllForAdmin().subscribe((res : Appointment[]) =>{
         this.appointmentList.push(...res)
 
         const doctorIds = [...new Set(res.map(a => a.doctorId))];
@@ -49,5 +50,33 @@ export class UserDashBoardComponent implements OnInit{
         console.error("Error deleting appointment:", err);
       }
     })
+  }
+
+  confirmAppointment(id: number) {
+    this.appointmentService.updateAppointmentStatus(id, 'CONFIRMED').subscribe({
+      next: () => {
+        const appointment = this.appointmentList.find(a => a.id === id);
+        if (appointment) {
+          appointment.status = 'CONFIRMED';
+        }
+      },
+      error: err => {
+        console.error('Error confirming appointment:', err);
+      }
+    });
+  }
+
+  rejectAppointment(id: number) {
+    this.appointmentService.updateAppointmentStatus(id, 'REJECTED').subscribe({
+      next: () => {
+        const appointment = this.appointmentList.find(a => a.id === id);
+        if (appointment) {
+          appointment.status = 'REJECTED';
+        }
+      },
+      error: err => {
+        console.error('Error rejecting appointment:', err);
+      }
+    });
   }
 }

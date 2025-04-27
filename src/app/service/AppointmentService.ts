@@ -20,6 +20,10 @@ export class AppointmentService{
     return this.http.get<Appointment[]>('http://localhost:8080/appointment/get-all?userId='+ userId);
   }
 
+  getAllForAdmin() : Observable<Appointment[]>{
+    return this.http.get<Appointment[]>('http://localhost:8080/appointment/get-all-forAdmin');
+  }
+
   getDoctorById(doctorId : number) :Observable<Doctor>{
 
     const token = localStorage.getItem("Token");
@@ -49,4 +53,9 @@ export class AppointmentService{
       withCredentials : true
     })
   }
+
+  updateAppointmentStatus(id: number, status: string): Observable<any> {
+    return this.http.put(`http://localhost:8080/appointment/update-appointment-status?appointmentId=${id}&status=${status}`, {});
+  }
+
 }
