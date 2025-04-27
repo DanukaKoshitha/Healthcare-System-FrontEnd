@@ -44,6 +44,7 @@ export class MainDashboardComponent {
 
   showModal() {
     const modal = document.getElementById('error-modal');
+
     if (modal) {
       modal.classList.remove('hidden', 'opacity-0');
       modal.classList.add('opacity-100');
@@ -52,6 +53,7 @@ export class MainDashboardComponent {
 
   closeModal() {
     const modal = document.getElementById('error-modal');
+
     if (modal) {
       modal.classList.remove('opacity-100');
       modal.classList.add('opacity-0');
