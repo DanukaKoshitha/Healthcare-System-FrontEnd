@@ -21,7 +21,7 @@ export class UserDashBoardComponent implements OnInit{
 
   appointmentList : Appointment[] = [];
   doctorMap : Map<number, Doctor> = new Map();
-  userRole : string = "ADMIN";
+  userRole : string = "PATIENT";
 
   ngOnInit() {
       this.appointmentService.getAllForAdmin().subscribe((res : Appointment[]) =>{

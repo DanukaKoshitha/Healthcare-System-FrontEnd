@@ -14,14 +14,25 @@ export interface AuthenticationResponse {
 })
 
 export class UserService {
+
+  private baseUrl = 'http://localhost:8080/user';
+
   constructor(private http: HttpClient) {}
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem("Token") || '';
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getLoginToken(email: string,password: string): Observable<AuthenticationResponse> {
     const body = { email, password };
 
-    return this.http.post<AuthenticationResponse>('http://localhost:8080/user/login',body).pipe(
+    return this.http.post<AuthenticationResponse>(`${this.baseUrl}/login`,body).pipe(
       catchError(() =>{
         return this.http.post<AuthenticationResponse>('http://localhost:8080/doctor/login',body);
       })
@@ -31,21 +42,14 @@ export class UserService {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getRegisterToken(body: any): Observable<AuthenticationResponse> {
-    return this.http.post<AuthenticationResponse>('http://localhost:8080/user/register',body);
+    return this.http.post<AuthenticationResponse>(`${this.baseUrl}/register`,body);
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getUsers(){
-    const token = localStorage.getItem("Token");
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.get<User[]>('http://localhost:8080/user/get-all',{
-      headers : headers,
+    return this.http.get<User[]>(`${this.baseUrl}/get-all`,{
+      headers : this.getAuthHeaders(),
       withCredentials : true
     })
   }
@@ -53,16 +57,8 @@ export class UserService {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   userSearchById(id : number){
-
-    const token = localStorage.getItem("Token");
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.get<User>('http://localhost:8080/user/search-by-id?id=' + id,{
-      headers : headers,
+    return this.http.get<User>(`${this.baseUrl}/search-by-id?id=` + id,{
+      headers : this.getAuthHeaders(),
       withCredentials : true
     });
   }
@@ -70,16 +66,8 @@ export class UserService {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   updateUser(body : User) : Observable<User>{
-
-    const token = localStorage.getItem("Token");
-
-    const headers = new HttpHeaders({
-      'Authorization' : `Bearer ${token}`,
-      'Content-Type' : 'application/json'
-    })
-
-    return this.http.put<User>('http://localhost:8080/user/update',body,{
-      headers : headers,
+    return this.http.put<User>(`${this.baseUrl}/update`,body,{
+      headers : this.getAuthHeaders(),
       withCredentials : true
     })
   }
@@ -87,21 +75,14 @@ export class UserService {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   saveUser(body : any){
-    return this.http.post<User>('http://localhost:8080/user/register',body)
+    return this.http.post<User>(`${this.baseUrl}/register`,body)
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   deleteUser(userId : number){
-    const token = localStorage.getItem("Token");
-
-    const headers = new HttpHeaders({
-      'Authorization' : `Bearer ${token}`,
-      'Content-Type' : 'application/json'
-    })
-
-    return this.http.delete('http://localhost:8080/user/delete?id=' + userId,{
-      headers : headers,
+    return this.http.delete(`${this.baseUrl}/delete?id=` + userId,{
+      headers : this.getAuthHeaders(),
       withCredentials : true
     });
   }
