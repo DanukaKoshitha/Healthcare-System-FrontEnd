@@ -9,21 +9,23 @@ import { Doctor } from "../model/Doctor";
 
 export class DoctorService{
 
+  private baseUrl = 'http://localhost:8080/doctor';
+
   constructor(private http:HttpClient){}
+
+  private getAuthHeaders(): HttpHeaders {
+    const token = localStorage.getItem("Token") || '';
+    return new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'
+    });
+  }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getDoctors(): Observable<Doctor[]> {
-
-    const token = localStorage.getItem("Token");
-
-    const headers = new HttpHeaders({
-      'Authorization': `Bearer ${token}`,
-      'Content-Type': 'application/json'
-    });
-
-    return this.http.get<Doctor[]>('http://localhost:8080/doctor/get-all', {
-      headers: headers,
+    return this.http.get<Doctor[]>(`${this.baseUrl}/get-all`, {
+      headers: this.getAuthHeaders(),
       withCredentials: true
     })
   }
@@ -31,22 +33,14 @@ export class DoctorService{
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   doctorRegister(body : any) {
-    return this.http.post<Doctor[]>('http://localhost:8080/doctor/register', body);
+    return this.http.post<Doctor[]>(`${this.baseUrl}/register`, body);
   }
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   deleteDoctorById(id : number){
-
-    const token = localStorage.getItem("Token");
-
-    const header = new HttpHeaders({
-      'Authorization' : `Bearer ${token}`,
-      'Content-Type' : 'application/json'
-    });
-
-    return this.http.delete('http://localhost:8080/doctor/delete?id=' + id,{
-      headers : header,
+    return this.http.delete(`${this.baseUrl}/delete?id=` + id,{
+      headers : this.getAuthHeaders(),
       withCredentials : true
     });
   }
@@ -54,20 +48,11 @@ export class DoctorService{
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
   updateDoctor(body :Doctor){
-
-    const token = localStorage.getItem("Token");
-
-    const header = new HttpHeaders({
-      'Authorization' : `Bearer ${token}`,
-      'Content-Type' : 'application/json'
-    });
-
-    return this.http.put<Doctor>('http://localhost:8080/doctor/update',body,{
-      headers : header,
+    return this.http.put<Doctor>(`${this.baseUrl}/update`,body,{
+      headers : this.getAuthHeaders(),
       withCredentials : true
     });
   }
-
 }
 
 
