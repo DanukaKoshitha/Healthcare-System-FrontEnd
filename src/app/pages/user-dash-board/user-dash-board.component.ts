@@ -5,23 +5,25 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Appointment } from '../../model/Appointment';
 import { Doctor } from '../../model/Doctor';
+import { UserService } from '../../service/UserService';
+import { User } from '../../model/User';
 
 @Component({
   selector: 'app-user-dash-board',
   imports: [CommonModule,FormsModule,HttpClientModule],
   templateUrl: './user-dash-board.component.html',
   styleUrl: './user-dash-board.component.css',
-  providers : [AppointmentService],
+  providers : [AppointmentService,UserService],
   standalone : true
 })
 
 export class UserDashBoardComponent implements OnInit{
 
-  constructor(private appointmentService: AppointmentService){}
+  constructor(private appointmentService: AppointmentService , private userService : UserService){}
 
   appointmentList : Appointment[] = [];
   doctorMap : Map<number, Doctor> = new Map();
-  userRole : string = "PATIENT";
+  userRole : string = "";
 
   ngOnInit() {
       this.appointmentService.getAllForAdmin().subscribe((res : Appointment[]) =>{
@@ -35,6 +37,10 @@ export class UserDashBoardComponent implements OnInit{
             })
         });
       });
+
+      this.userService.userSearchById(Number(localStorage.getItem("UserId"))).subscribe((res : User) =>{
+        this.userRole = res.role;
+      })
   }
 
   deleteAppointment(id : number){
@@ -53,7 +59,7 @@ export class UserDashBoardComponent implements OnInit{
   }
 
   confirmAppointment(id: number) {
-    this.appointmentService.updateAppointmentStatus(id, 'CONFIRMED').subscribe({
+    this.appointmentService.updateAppointmentStatus(id, 'APPROVE').subscribe({
       next: () => {
         const appointment = this.appointmentList.find(a => a.id === id);
         if (appointment) {
@@ -67,7 +73,7 @@ export class UserDashBoardComponent implements OnInit{
   }
 
   rejectAppointment(id: number) {
-    this.appointmentService.updateAppointmentStatus(id, 'REJECTED').subscribe({
+    this.appointmentService.updateAppointmentStatus(id, 'REJECT').subscribe({
       next: () => {
         const appointment = this.appointmentList.find(a => a.id === id);
         if (appointment) {

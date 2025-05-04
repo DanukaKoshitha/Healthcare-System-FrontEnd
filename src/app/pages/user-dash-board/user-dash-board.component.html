@@ -43,65 +43,66 @@
 
         <tbody>
           <tr *ngFor="let appointment of appointmentList" class="bg-white border-b dark:bg-gray-700 dark:border-gray-900 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
-
-              <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                  <img class="w-10 h-10 rounded-full" [src]="doctorMap.get(appointment.doctorId)?.image" alt="Jese image">
-                  <div class="ps-3">
-                      <div class="text-base font-semibold">{{doctorMap.get(appointment.doctorId)?.name}}</div>
-                      <div class="font-normal text-gray-500">{{doctorMap.get(appointment.doctorId)?.specialization}}</div>
-                  </div>
-              </th>
-              <td class="ps-3">
-                <div class="text-base font-semibold">{{appointment.date}}</div>
-                <div class="font-normal text-gray-500">{{appointment.timeSlot}}</div>
-              </td>
-
-
-              <td class="px-6 py-4">
-                <div class="flex items-center">
-                  <div class="h-2.5 w-2.5 rounded-full"
-                    [ngClass]="{
-                      'bg-yellow-500': appointment.status === 'PENDING',
-                      'bg-green-500': appointment.status === 'CONFIRMED',
-                      'bg-red-500': appointment.status === 'REJECTED'
-                    }">
-                  </div>
-                  <span class="ml-2 px-2 py-1 rounded-full text-xs font-medium"
-                    [ngClass]="{
-                      'bg-yellow-100 text-yellow-800': appointment.status === 'PENDING',
-                      'bg-green-100 text-green-800': appointment.status === 'CONFIRMED',
-                      'bg-red-100 text-red-800': appointment.status === 'REJECTED'
-                    }">
-                    {{appointment.status}}
-                  </span>
+        
+            <th scope="row" class="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
+              <img class="w-10 h-10 rounded-full" [src]="doctorMap.get(appointment.doctorId)?.image" alt="Doctor image">
+              <div class="ps-3">
+                <div class="text-base font-semibold">{{doctorMap.get(appointment.doctorId)?.name}}</div>
+                <div class="font-normal text-gray-500">{{doctorMap.get(appointment.doctorId)?.specialization}}</div>
+              </div>
+            </th>
+        
+            <td class="ps-3">
+              <div class="text-base font-semibold">{{appointment.date}}</div>
+              <div class="font-normal text-gray-500">{{appointment.timeSlot}}</div>
+            </td>
+        
+            <td class="px-6 py-4">
+              <div class="flex items-center">
+                <div class="h-2.5 w-2.5 rounded-full"
+                  [ngClass]="{
+                    'bg-yellow-500': appointment.status === 'PENDING',
+                    'bg-green-500': appointment.status === 'CONFIRMED',
+                    'bg-red-500': appointment.status === 'REJECTED'
+                  }">
                 </div>
-              </td>
-              <td class="px-6 py-4">
-                <!-- Admin actions for PENDING appointments -->
-                <ng-container *ngIf="userRole === 'ADMIN' && appointment.status === 'PENDING'">
-                  <button (click)="confirmAppointment(appointment.id)" class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm mr-2">
-                    Approve
-                  </button>
-                  <button (click)="rejectAppointment(appointment.id)" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm">
-                    Reject
-                  </button>
-                </ng-container>
-
-                <!-- Status display when already processed -->
-                <ng-container *ngIf="userRole === 'ADMIN' && appointment.status && appointment.status !== 'PENDING'">
-                  <span class="text-gray-500 text-sm">No action needed</span>
-                </ng-container>
-
-                <!-- Delete option for non-admin users -->
-                <ng-container *ngIf="userRole !== 'ADMIN'">
-                  <a (click)="deleteAppointment(appointment.id)" class="font-medium text-blue-600 hover:underline cursor-pointer">
-                    Delete
-                  </a>
-                </ng-container>
-              </td>
-
+                <span class="ml-2 px-2 py-1 rounded-full text-xs font-medium"
+                  [ngClass]="{
+                    'bg-yellow-100 text-yellow-800': appointment.status === 'PENDING',
+                    'bg-green-100 text-green-800': appointment.status === 'CONFIRMED',
+                    'bg-red-100 text-red-800': appointment.status === 'REJECTED'
+                  }">
+                  {{appointment.status}}
+                </span>
+              </div>
+            </td>
+        
+            <td class="px-6 py-4">
+              <!-- Admin actions for PENDING appointments -->
+              <ng-container *ngIf="userRole === 'ADMIN' && appointment.status === 'PENDING'">
+                <button (click)="confirmAppointment(appointment.id)" class="px-3 py-1 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm mr-2">
+                  Approve
+                </button>
+                <button (click)="rejectAppointment(appointment.id)" class="px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm">
+                  Reject
+                </button>
+              </ng-container>
+        
+              <!-- Status display when already processed -->
+              <ng-container *ngIf="userRole === 'ADMIN' && appointment.status !== 'PENDING'">
+                <span class="text-gray-500 text-sm">No action needed</span>
+              </ng-container>
+        
+              <!-- Delete option for non-admin users -->
+              <ng-container *ngIf="userRole !== 'ADMIN'">
+                <a (click)="deleteAppointment(appointment.id)" class="font-medium text-blue-600 hover:underline cursor-pointer">
+                  Delete
+                </a>
+              </ng-container>
+            </td>
+        
           </tr>
-      </tbody>
+        </tbody>        
       </table>
     </div>
   </div>
