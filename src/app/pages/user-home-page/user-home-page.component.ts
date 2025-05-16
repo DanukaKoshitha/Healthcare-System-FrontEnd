@@ -29,9 +29,7 @@ export class UserHomePageComponent implements OnInit{
 
   ngOnInit(): void {
       this.userService.userSearchById(Number(localStorage.getItem("UserId"))).subscribe(res => {
-        if(res.role == "PATIENT"){
             this.userRole = res.role;
-        }
       })
   }
 

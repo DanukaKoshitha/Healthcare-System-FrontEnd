@@ -62,7 +62,6 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">First Name</label>
                     <input type="text"
                            placeholder="Enter first name"
-                           [(ngModel)]="patient_firstName" name="patient_firstName"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                            required>
                   </div>
@@ -71,7 +70,6 @@
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Last Name</label>
                     <input type="text"
                            placeholder="Enter last name"
-                           [(ngModel)]="patient_lastName" name="patient_lastName"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                            required>
                   </div>
@@ -79,7 +77,6 @@
                   <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Gender</label>
                     <select
-                    [(ngModel)]="patient_gender" name="patient_gender"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white">
                       <option value="" disabled selected>Select gender</option>
                       <option value="MALE">Male</option>
@@ -91,7 +88,6 @@
                   <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contact Number</label>
                     <input type="tel"
-                           [(ngModel)]="patient_contact" name="patient_contact"
                            placeholder="e.g., 0771234567"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                            pattern="[0-9]{10}" maxlength="10" required>
@@ -103,7 +99,6 @@
               <div>
                 <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Full Address</label>
                 <textarea rows="1"
-                          [(ngModel)]="patient_address" name="patient_address"
                           placeholder="Enter full address"
                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                           required></textarea>
@@ -117,7 +112,6 @@
                   <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Email Address</label>
                     <input type="email"
-                          [(ngModel)]="patient_email" name="patient_email"
                            placeholder="e.g., example@gmail.com"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                            required>
@@ -126,7 +120,6 @@
                   <div>
                     <label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
                     <input type="password"
-                          [(ngModel)]="patient_password" name="patient_password"
                            placeholder="Enter a secure password"
                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
                            required>
