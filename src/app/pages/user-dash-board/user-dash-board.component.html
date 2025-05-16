@@ -95,7 +95,7 @@
         
               <!-- Delete option for non-admin users -->
               <ng-container *ngIf="userRole !== 'ADMIN'">
-                <a (click)="deleteAppointment(appointment.id)" class="font-medium text-blue-600 hover:underline cursor-pointer">
+                <a (click)="deleteAppointment(appointment.id)" style="color: red;" class="font-medium hover:underline cursor-pointer">
                   Delete
                 </a>
               </ng-container>

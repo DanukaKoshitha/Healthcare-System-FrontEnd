@@ -29,6 +29,7 @@ export class SettingComponent implements OnInit{
   ngOnInit(): void {
       this.userService.userSearchById(Number(localStorage.getItem("UserId"))).subscribe(res =>{
 
+        if(res != null){
         this.firstName = res.firstName;
         this.lastName = res.lastName;
         this.contact = res.contact;
@@ -37,6 +38,10 @@ export class SettingComponent implements OnInit{
         this.gender = res.gender;
         this.email = res.email;
         this.password = res.password;
+        }else{
+          console.log("Doctor");
+          
+        }
     })
   }
 
