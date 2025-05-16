@@ -32,6 +32,15 @@ export class DoctorService{
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  doctorSearchById(id : number): Observable<Doctor> {
+    return this.http.get<Doctor>(`${this.baseUrl}/search-by-id?id=` + id, {
+      headers: this.getAuthHeaders(),
+      withCredentials: true
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
   doctorRegister(body : any) {
     return this.http.post<Doctor[]>(`${this.baseUrl}/register`, body);
   }

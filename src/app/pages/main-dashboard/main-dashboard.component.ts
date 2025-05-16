@@ -33,6 +33,14 @@ export class MainDashboardComponent {
         console.log(response.userId);
         localStorage.setItem("UserId",response.userId.toString());
 
+        if(response.userRole == null){
+          localStorage.setItem("UserRole","Doctor");
+        }else if(response.userRole == "PATIENT"){
+          localStorage.setItem("UserRole","Patient");
+        }else{
+          localStorage.setItem("UserRole","Admin");
+        }
+
         this.router.navigate(['/userHomePage']);
       },
       (error) => {
