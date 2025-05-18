@@ -53,6 +53,9 @@ export class SettingComponent implements OnInit{
   startTime : string = "";
   endTime : string = "";
 
+  isDoctor : boolean = false;
+  isUser : boolean = false;
+  isAdmin : boolean = false;
 
   constructor(private userService : UserService , private doctorService : DoctorService, private http : HttpClient){}
 
@@ -61,6 +64,7 @@ export class SettingComponent implements OnInit{
     this.userRole  = localStorage.getItem("UserRole");
 
     if(this.userRole == "Doctor"){
+      this.isDoctor = true;
       this.doctorService.doctorSearchById(Number(localStorage.getItem("UserId"))).subscribe(res =>{
         this.fullName = res.name;
         this.Doctor_contact = res.contact;
@@ -77,6 +81,9 @@ export class SettingComponent implements OnInit{
     }else{
       this.userService.userSearchById(Number(localStorage.getItem("UserId"))).subscribe(res =>{
 
+        this.isAdmin = true;
+        this.isUser = true;
+        
         this.firstName = res.firstName;
         this.lastName = res.lastName;
         this.contact = res.contact;
