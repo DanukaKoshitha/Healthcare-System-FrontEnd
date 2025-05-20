@@ -7,6 +7,7 @@ import { User } from '../model/User';
 export interface AuthenticationResponse {
   token: string;
   userId: number;
+  userRole: string;
 }
 
 @Injectable({

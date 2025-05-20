@@ -1,15 +1,25 @@
 <div class="bg-white dark:bg-gray-900 min-h-screen px-6 py-10">
   <div class="max-w-4xl mx-auto">
-    <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-10">
+    <h2
+      class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-10"
+    >
       Your Profile
     </h2>
 
-    <form (ngSubmit)="update()" class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 space-y-6">
-
+    <form
+      id="user-form"
+      *ngIf="isUser || isAdmin"
+      (ngSubmit)="update()"
+      class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 space-y-6"
+    >
       <div class="grid gap-6 md:grid-cols-2">
         <!-- First Name -->
         <div>
-          <label for="first_name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">First Name</label>
+          <label
+            for="first_name"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300"
+            >First Name</label
+          >
           <input
             type="text"
             id="first_name"
@@ -23,7 +33,11 @@
 
         <!-- Last Name -->
         <div>
-          <label for="last_name" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Last Name</label>
+          <label
+            for="last_name"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300"
+            >Last Name</label
+          >
           <input
             type="text"
             id="last_name"
@@ -37,7 +51,11 @@
 
         <!-- Address -->
         <div>
-          <label for="address" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Address</label>
+          <label
+            for="address"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300"
+            >Address</label
+          >
           <input
             type="text"
             id="address"
@@ -51,7 +69,11 @@
 
         <!-- Phone Number -->
         <div>
-          <label for="phone" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Phone Number</label>
+          <label
+            for="phone"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300"
+            >Phone Number</label
+          >
           <input
             type="tel"
             id="phone"
@@ -66,11 +88,13 @@
 
         <!-- Role -->
         <div>
-          <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Role</label>
+          <label
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300"
+            >Role</label
+          >
           <input
             type="tel"
             id="phone"
-            placeholder="011-4567890"
             pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
             [(ngModel)]="role"
             name="role"
@@ -82,7 +106,11 @@
 
         <!-- Gender -->
         <div>
-          <label for="gender-dropdown" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Gender</label>
+          <label
+            for="gender-dropdown"
+            class="block text-sm font-semibold text-gray-700 dark:text-gray-300"
+            >Gender</label
+          >
           <select
             id="gender-dropdown"
             [(ngModel)]="gender"
@@ -99,7 +127,11 @@
 
       <!-- Email -->
       <div>
-        <label for="email" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">Email Address</label>
+        <label
+          for="email"
+          class="block text-sm font-semibold text-gray-700 dark:text-gray-300"
+          >Email Address</label
+        >
         <input
           type="email"
           id="email"
@@ -120,8 +152,270 @@
           Update Profile
         </button>
       </div>
-
     </form>
 
+    <!-- /////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+
+    <form
+      id="doctor-form"
+      *ngIf="isDoctor"
+      (ngSubmit)="update()"
+      class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 space-y-6"
+    >
+      <!-- Modal Body -->
+      <div class="font-semibold py-2 px-6 rounded-xl shadow-lg transition-all duration-300">
+        <!-- Added max-height -->
+        <!-- Modal Content -->
+        <div
+          class="relative bg-white rounded-lg shadow dark:bg-gray-700 h-full flex flex-col"
+        >
+          <!-- Modal Header (Fixed) -->
+          <div
+            class="flex items-center justify-between p-5 border-b rounded-t dark:border-gray-600 sticky top-0 bg-white dark:bg-gray-700 z-10"
+          >
+            <h3 class="text-xl font-medium text-gray-900 dark:text-white">
+              Doctor Details
+            </h3>
+          </div>
+
+          <!-- Scrollable Body -->
+          <div class="flex-1 overflow-y-auto p-6">
+            <!-- Added scrollable area -->
+            <form class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- ... (Keep all your existing form content here) ... -->
+
+              <!-- Modal Body -->
+
+              <!-- Left Column -->
+              <div class="space-y-4">
+                <!-- Name -->
+                <div >
+                  <label
+                    class="block text-sm pb-2 font-medium text-gray-900 dark:text-white"
+                    >Full Name</label
+                  >
+                  <input
+                    type="text"
+                    [(ngModel)]="fullName"
+                    name="fullName"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    placeholder="Dr. Emily Watson"
+                    required
+                  />
+                </div>
+
+                <!-- Contact -->
+                <div class="pb-4">
+                  <label
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Contact Number</label
+                  >
+                  <input
+                    type="tel"
+                    [(ngModel)]="Doctor_contact"
+                    name="contact"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    placeholder="+94 771453625"
+                    required
+                  />
+                </div>
+
+                <!-- Address -->
+                <div class="pb-4">
+                  <label
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Address</label
+                  >
+                  <textarea
+                    [(ngModel)]="Doctor_address"
+                    name="Doctor_address"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    rows="3"
+                    placeholder="456 Health Avenue, Boston, MA 02120, USA"
+                  ></textarea>
+                </div>
+
+                <!-- Specialization -->
+                <div class="pb-4">
+                  <label
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Specialization</label
+                  >
+                  <select
+                    [(ngModel)]="Doctor_specialization"
+                    name="Doctor_specialization"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                  >
+                    <option selected>Cardiology</option>
+                    <option>Neurology</option>
+                    <option>Pediatrics</option>
+                    <option>Orthopedics</option>
+                  </select>
+                </div>
+
+                <!-- Qualifications -->
+                <div class="space-y-2 pb-4">
+                  <label
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >Qualifications</label
+                  >
+                  <div class="space-y-2 qualifications-container">
+                    <div class="flex gap-2 pb-4">
+                      <input
+                        [(ngModel)]="degree"
+                        name="degree"
+                        type="text"
+                        placeholder="Degree"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                      <input
+                        [(ngModel)]="institution"
+                        name="institution"
+                        type="text"
+                        placeholder="Institution"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                      <input
+                        [(ngModel)]="year"
+                        name="year"
+                        type="number"
+                        placeholder="Year"
+                        min="1900"
+                        max="2099"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    (click)="addQualification()"
+                    type="button"
+                    class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                  >
+                    Add Qualification
+                  </button>
+                </div>
+              </div>
+
+              <!-- Right Column -->
+              <div class="space-y-4 pb-4">
+                <!-- Availability -->
+                <div class="space-y-2 pb-4">
+                  <label
+                    class="block text-sm font-medium text-gray-900 dark:text-white"
+                    >Availability</label
+                  >
+                  <div class="space-y-2 time-slots-container pb-4">
+                    <div class="flex gap-2">
+                      <select
+                        [(ngModel)]="day"
+                        name="day"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      >
+                        <option value="MONDAY">Monday</option>
+                        <option value="TUESDAY">Tuesday</option>
+                        <option value="WEDNESDAY">Wednesday</option>
+                        <option value="THURSDAY">Thursday</option>
+                        <option value="FRIDAY">Friday</option>
+                        <option value="SATURDAY">Saturday</option>
+                        <option value="SUNDAY">Sunday</option>
+                      </select>
+                      <input
+                        [(ngModel)]="startTime"
+                        name="startTime"
+                        type="time"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                      <input
+                        [(ngModel)]="endTime"
+                        name="endTime"
+                        type="time"
+                        class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-1/3 p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    (click)="addTime()"
+                    type="button"
+                    class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-xs px-3 py-1.5 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                  >
+                    Add Time Slot
+                  </button>
+                </div>
+
+                <!-- Email & Password -->
+                <div class="pb-4">
+                  <label
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Email</label
+                  >
+                  <input
+                    [(ngModel)]="Doctor_email"
+                    name="Doctor_email"
+                    type="email"
+                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                    placeholder="emilywatson@gmail.com"
+                    required
+                  />
+                </div>
+
+                <!-- Experience & Price -->
+                <div class="grid grid-cols-2 gap-4 pb-4">
+                  <div>
+                    <label
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Years of Experience</label
+                    >
+                    <input
+                      [(ngModel)]="Doctor_yearsOfExperience"
+                      name="Doctor_yearsOfExperience"
+                      type="number"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      min="0"
+                      value="10"
+                    />
+                  </div>
+                  <div>
+                    <label
+                      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                      >Consultation Fee</label
+                    >
+                    <input
+                      [(ngModel)]="Doctor_price"
+                      name="Doctor_price"
+                      type="number"
+                      step="0.01"
+                      class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                      value="2500.00"
+                    />
+                  </div>
+                </div>
+
+                <!-- Image Upload -->
+                <div>
+                  <label
+                    class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                    >Profile Photo</label
+                  >
+                  <input
+                    type="file"
+                    (change)="onFileSelected($event)"
+                    class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400"
+                  />
+                </div>
+                <!-- Submit Button -->
+                <div class="text-right pt-5 pr-0.5">
+                  <button
+                    type="submit"
+                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-xl shadow-lg transition-all duration-300"
+                  >
+                    Update Profile
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
