@@ -56,8 +56,8 @@ export class DoctorService{
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  updateDoctor(body :Doctor){
-    return this.http.put<Doctor>(`${this.baseUrl}/update`,body,{
+  updateDoctor(body :any){
+    return this.http.put<any>(`${this.baseUrl}/update`,body,{
       headers : this.getAuthHeaders(),
       withCredentials : true
     });

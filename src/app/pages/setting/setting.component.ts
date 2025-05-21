@@ -119,6 +119,29 @@ export class SettingComponent implements OnInit{
 
   ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
+  updateDoctor(){
+    const body = {
+      id : Number(localStorage.getItem("UserId")),
+      name : this.fullName,
+      contact : this.Doctor_contact,
+      address : this.Doctor_address,
+      specialization : this.Doctor_specialization,
+      qualifications : this.Doctor_qualifications,
+      timeSlots : this.Doctor_timeSlots,
+      image : this.Doctor_image,
+      email : this.Doctor_email,
+      password : this.Doctor_password,
+      yearsOfExperience : this.Doctor_yearsOfExperience,
+      price : this.Doctor_price
+    }
+
+    this.doctorService.updateDoctor(body).subscribe(res => {
+      console.log(res);
+    })
+  }
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
     addQualification(){
       this.Doctor_qualifications.push({
         name : this.degree,

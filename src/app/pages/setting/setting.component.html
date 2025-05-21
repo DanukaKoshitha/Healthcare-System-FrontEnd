@@ -159,7 +159,6 @@
     <form
       id="doctor-form"
       *ngIf="isDoctor"
-      (ngSubmit)="update()"
       class="bg-white dark:bg-gray-800 shadow-xl rounded-2xl p-8 space-y-6"
     >
       <!-- Modal Body -->
@@ -405,7 +404,7 @@
                 <!-- Submit Button -->
                 <div class="text-right pt-5 pr-0.5">
                   <button
-                    type="submit"
+                    (click)="updateDoctor()"
                     class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-xl shadow-lg transition-all duration-300"
                   >
                     Update Profile

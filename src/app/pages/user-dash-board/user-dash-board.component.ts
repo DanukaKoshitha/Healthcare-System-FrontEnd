@@ -29,9 +29,7 @@ export class UserDashBoardComponent implements OnInit {
 
   ngOnInit() {
     const userId = Number(localStorage.getItem('UserId'));
-  
-    this.userService.userSearchById(userId).subscribe((res: User) => {
-      this.userRole = res.role;
+    this.userRole = localStorage.getItem('UserRole') || '';
   
       this.appointmentService.getAllForAdmin().subscribe((res: Appointment[]) => {
         if (this.userRole === 'ADMIN') {
@@ -58,7 +56,6 @@ export class UserDashBoardComponent implements OnInit {
           });
         }
       });
-    });
   }
   
   deleteAppointment(id: number) {
