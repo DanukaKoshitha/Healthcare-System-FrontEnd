@@ -156,8 +156,12 @@ export class DoctorsComponent implements OnInit{
       yearsOfExperience : this.Doctor_yearsOfExperience,
       price : this.Doctor_price
     }
+    console.log(body);
+    
 
     this.doctorService.doctorRegister(body).subscribe(res => {
+      console.log(body);
+      
       console.log(res);
     })
 
