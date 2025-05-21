@@ -49,7 +49,7 @@ export class AppointmentService{
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
   getDoctorById(doctorId : number) :Observable<Doctor>{
-    return this.http.get<Doctor>('http://localhost:8080/doctor/search-by-id?id='+doctorId , {
+    return this.http.get<Doctor>('http://localhost:8080/doctor/search-by-id?id='+ doctorId , {
       headers : this.getAuthHeaders(),
       withCredentials : true
     })
