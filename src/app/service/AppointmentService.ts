@@ -24,8 +24,8 @@ export class AppointmentService{
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-  createAppointment(body : any){
-    return this.http.post(`${this.baseUrl}/save`,body);
+  createAppointment(body : any): Observable<Appointment>{
+    return this.http.post<Appointment>(`${this.baseUrl}/save`,body);
   }
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -63,4 +63,18 @@ export class AppointmentService{
       withCredentials : true
     })
   }
+
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+  createPayment(price : number) : Observable<any>{
+    const body = {
+      appointmentId : localStorage.getItem("AppointmentId"),
+      userId : localStorage.getItem("UserId"),
+      amount : price,
+      currency : "LKR"
+    }
+
+    return this.http.post('http://localhost:8080/payment/pay',body)
+  }
+
 }

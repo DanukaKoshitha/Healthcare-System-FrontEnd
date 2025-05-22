@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, Observable, throwError } from 'rxjs';
-import { Doctor } from '../model/Doctor';
 import { User } from '../model/User';
 
 export interface AuthenticationResponse {

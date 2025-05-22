@@ -47,13 +47,17 @@ export class AppointmentDashboardComponent implements OnInit{
       status : this.status
     }
 
-    this.appointmentService.createAppointment(body).subscribe(
-      (response) =>{console.log("Successfull " + response);
+    this.appointmentService.createAppointment(body).subscribe({
+      next: (res) => {
+        console.log('Appointment created:', res);
+        
+        localStorage.setItem("AppointmentId", res.id.toString());
       },
-      (error) => {
-        console.log("Error" , error);
+      error: (err) => {
+        console.error('Error creating appointment:', err);
       }
-    );
+    });
+
 
   }
 
@@ -63,6 +67,20 @@ export class AppointmentDashboardComponent implements OnInit{
     }, error => {
       console.error("Error fetching doctors:", error);
     });
+  }
+
+  stripePayment(){
+    if(this.selectedDoctor?.price){
+    this.appointmentService.createPayment(this.selectedDoctor?.price).subscribe({
+      next: (res) => {
+        console.log('Payment created:', res);
+        window.location.href = res.sessionUrl;
+      },
+      error: (err) => {
+        console.error('Error creating payment:', err);
+      }
+    })
+    }
   }
 
   showModel(doctor : Doctor){
